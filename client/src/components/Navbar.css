@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Geist+Mono:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+}
+
+.nav-container {
+    position: fixed;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    width: 1600px;
+    margin: 0 auto;
+    height: 70px;
+    background-color: #eeee;
+    border-bottom: 1px solid #b7b7b7;
+}
+
+.button-menu {
+    position: relative;
+    right: 565px;
+    background-color: #B90303;
+    height: 40px;
+    width: 40px;
+    color: white;
+    font-size: 23px;
+    text-align: center;
+    text-wrap: wrap;
+    border: none;
+    padding: 21px;
+    border-radius: 100%;
+    margin: 15px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.button-menu:hover {
+    background-color: #8f0000;
+    color: rgb(189, 189, 189);
+}
+
+.menu-icon {
+    position: relative;
+    right: 12px;
+    bottom: 13px;
+}
+
+
+
+.user-photo {
+    position: relative;
+    left: 637px;
+    margin: 5px;
+    margin-top: 10px;
+    width: 49px;
+    height: 49px;
+}
+
+.user-name {
+    position: relative;
+    left: 499px;
+    bottom: 60px;
+    margin: 5px;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.btn-logout {
+    background-color: #B90303;
+    color: white;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    border-right: 3px solid #8f0000;
+    border-bottom: 2px solid #8f0000;
+    height: 40px;
+    width: 120px;
+    position: relative;
+    top: 15px;
+    left: 595px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-logout:hover {
+    box-shadow: 1px 2px 5px #B90303;
+    transform: translateY(-5px);
+}
