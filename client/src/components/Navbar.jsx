@@ -27,7 +27,7 @@ function Navbar() {
         </button>
         <div className="profile">
           <img className="user-photo" src={PhotoProfile} alt="User  Profile" />
-          <h3 className="user-name">Nama User</h3>
+          <h3 className="user-name">BACO ANDAYANA BIN BASO</h3>
         </div>
         <button className="btn-logout" onClick={handleLogout}>
           Log out
@@ -36,9 +36,9 @@ function Navbar() {
 
       <div className={`sidebar-offcanvas-container ${isSidebarVisible ? 'visible' : ''}`}>
         <ul>
-          <li><a href="#"> <span><GoHomeFill/></span> Home</a></li>
-          <li><a href="#"> <span><FaUser /></span> Profile</a></li>
-          <li><a href="#"><span className="icon-navigation-eskul"><FaUsersGear/></span> Eskul lainnya</a></li>
+          <li><a href="/home"> <span><GoHomeFill/></span> Home</a></li>
+          <li><a href="/profile"> <span><FaUser /></span> Profile</a></li>
+          <li><a href="#"><span className="icon-navigation-eskul"><FaUsersGear/></span> Ekskul lainnya</a></li>
         </ul>
       </div>
     </>

@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Geist+Mono:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+*,body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo {
+    width: 200px;
+    position: relative;
+    top: 100px;
+    left: 830px;
+    z-index: 100;
+}
+
+.user-name-profile {
+    position: relative;
+    top: 230px;
+    left: 650px;  
+    width: 500px;
+    z-index: 100;
+}
+
+.nis-nisn {
+    display: flex;
+    position: relative;
+    top: 360px;
+    right: 420px;
+}
+
+.nis-value, .nis {
+    position: relative;
+    left: 100px;
+}
+
+.nisn {
+    margin-left: 100px;
+    font-weight: 700;
+    position: relative;
+    bottom: 23px;
+    left: 39px;
+}
+
+.nis{
+    font-weight: 700;
+    position: relative;
+    bottom: 23px;
+    left: 128px;
+}
+
+.nisn-value, .nis-value {
+    padding: 5px;    
+    width: 500px;
+}
