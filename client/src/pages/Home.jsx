@@ -16,7 +16,7 @@ function Home() {
           <button id="go-search-btn">GO</button>
 
           <div className="card-container">
-
+          
             <div className="card">
               <img src={SatryaRover} alt="Satrya Rover" />
               <h3>PRAMUKA (SATRYA ROVER)</h3>
