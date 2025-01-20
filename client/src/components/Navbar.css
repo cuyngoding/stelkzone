@@ -3,13 +3,14 @@
 .nav-container {
     position: fixed;
     right: 0px;
+    /* bottom: 705px; */
     display: flex;
     justify-content: center;
     width: 100%;
     height: 70px;
-    background-color: #eeee;
+    background-color: #eeeeee;
     border-bottom: 1px solid #b7b7b7;
-    z-index: 1000;
+    z-index: 10000;
 }
 
 .button-menu {
@@ -112,7 +113,10 @@
     text-decoration: none;
     color: #fff;
     font-weight: 700;
+    position: relative;
+    right: 40px;
     padding: 10px;
+    width: 150px;
     display: block;
     transition: 0.3s ease-in-out;
 }

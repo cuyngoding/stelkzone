@@ -1,1 +1,16 @@
-/* nda ada apa apa */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tetapkan overflow default */
+body.home-active {
+    overflow-y: auto; /* Scroll di halaman Home */
+}
+
+body.login-active {
+    overflow-y: hidden; /* Hilangkan scroll di halaman Login */
+}
+
