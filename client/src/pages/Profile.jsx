@@ -5,6 +5,7 @@ import PhotoUser from "../assets/user-profile.png"
 function Profile() {
   return (
     <>
+    <div className="profile-page">
 
     <Navbar />
     <div className="content-container">
@@ -21,7 +22,8 @@ function Profile() {
     </div>
      
     </div>
-
+    
+    </div>
     </>
   )
 }

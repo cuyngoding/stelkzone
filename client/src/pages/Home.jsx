@@ -20,7 +20,7 @@ function Home() {
           <Navbar />
           </header>
 
-          <h3 className="header1">STELKZONE - Beranda</h3>
+          <h3 className="header1">STELKZONE - Home</h3>
           <br />
           <h1>EKSTRAKURIKULER SAYA</h1>
           <input

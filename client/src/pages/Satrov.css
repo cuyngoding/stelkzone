@@ -1,11 +1,17 @@
 .logo-eskul {
     border-radius: 1000px;
-    width: 250px;
-    height: 250px;
+    width: 230px;
+    height: 230px;
     object-fit: cover;
     position: relative;
     top: 100px;
+    left: 107px;
 }
 .nama-eskul {
-
+position: relative;
+top: 95px;
+}
+.desc-label-eskul {
+    position: relative;
+    top: 4rem;
 }
