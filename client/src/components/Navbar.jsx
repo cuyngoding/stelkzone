@@ -15,6 +15,10 @@ function Navbar() {
     navigate('/'); // navigasi ke halaman login
   };
 
+  const toprofile = () => {
+    navigate('/profile');
+  }
+
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
@@ -26,8 +30,8 @@ function Navbar() {
           <LuMenu className="menu-icon" />
         </button>
         <div className="profile">
-          <img className="user-photo" src={PhotoProfile} alt="User  Profile" />
-          <h3 className="user-name">BACO ANDAYANA BIN BASO</h3>
+          <img className="user-photo" src={PhotoProfile} alt="User  Profile" onClick={toprofile} />
+          <a href="/profile" className="user-name">BACO ANDAYANA BIN BASO</a>
         </div>
         <button className="btn-logout" onClick={handleLogout}>
           Log out
@@ -38,7 +42,7 @@ function Navbar() {
         <ul>
           <li><a href="/home"> <span><GoHomeFill/></span> Home</a></li>
           <li><a href="/profile"> <span><FaUser /></span> Profile</a></li>
-          <li><a href="#"><span className="icon-navigation-eskul"><FaUsersGear/></span> Ekskul lainnya</a></li>
+          <li><a href="/more-ekskul"><span className="icon-navigation-eskul"><FaUsersGear/></span> Ekskul lainnya</a></li>
         </ul>
       </div>
     </>

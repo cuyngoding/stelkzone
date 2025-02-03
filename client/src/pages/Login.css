@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Geist+Mono:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
-/* *,body {
-    overflow: hidden;
-} */
-
 body {
     background-color: white;
     background-size: cover;
@@ -12,12 +8,14 @@ body {
     align-items: center;
     margin: 0;
 }
-
+.login-page {
+    max-height: 100vh;
+}
 .login-container {
     background-color: #fefefe;
     border: 1px solid #e0dede; 
     padding: 20px;
-    margin-top: 75px;
+    margin-top: 63px;
     margin-left: 550px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.1);
@@ -96,8 +94,8 @@ body {
 
 .wave {
     position: relative;
-    left: 0px;
-    bottom: 150px;
+    left: 0rem;
+    bottom: 11.200rem;
     width: 1550px;
     overflow: hidden;
 }

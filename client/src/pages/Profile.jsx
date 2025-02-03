@@ -10,19 +10,14 @@ function Profile() {
     <Navbar />
     <div className="content-container">
     <img className="profile-photo" src={PhotoUser} alt="" />
-    <h1 className="user-name-profile">Nama User</h1>
-
+    <h1 className="user-name-profile">BACO ANDAYANA BIN BASO</h1>
     <div className="nis-nisn">
       <label className="nis" htmlFor="">NIS</label>
-      <br />
-      <input className="nis-value" type="number" name="" id="" value={544231000} />
+      <input className="nis-value" type="number" name="" id="nis" value={544231000} />
       <label className="nisn" htmlFor="">NISN</label>
-      <br />
-      <input className="nisn-value" type="number" name="" id="" />
+      <input className="nisn-value" type="number" name="" id="nisn" value={1234567890} />
     </div>
-     
     </div>
-    
     </div>
     </>
   )

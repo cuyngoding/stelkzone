@@ -5,12 +5,13 @@ import WebTech from "../assets/web-tech.png";
 import Capture from "../assets/capture.png";
 import Gradasi from "../assets/gradasi.png";
 import Pastelk from "../assets/pastelk.png";
+import Elips from "../assets/elips.png";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
   const handleCheck = () => {
-    navigate("/home/satrov");
+    navigate("/home/satryarover");
   }
   return (
     <>
@@ -69,9 +70,9 @@ function Home() {
             </div>
 
             <div className="card">
-              <img src={SatryaRover} alt="Satrya Rover" />
-              <h3>PRAMUKA SATRYA ROVER</h3>
-              <p className="jumlah-anggota">Jumlah: 13</p>
+              <img src={Elips} alt="Satrya Rover" />
+              <h3>ROBOTIK (ELIPS)</h3>
+              <p className="jumlah-anggota">Jumlah: 7</p>
               <button type="button">CHECK</button>
             </div>
             <div className="card">

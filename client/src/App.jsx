@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import ProfileSatrov from './pages/Satrov';
 import './App.css';
+import NotFound from './pages/NotFound';
+import EskulLainnya from './pages/EskulLainnya';
 
 function App() {
   const Wrapper = ({ children }) => {
@@ -12,9 +14,9 @@ function App() {
 
     useEffect(() => {
       if (location.pathname === '/') {
-        document.body.style.overflow = 'hidden'; // Hilangkan scroll di halaman Login
+        document.body.style.overflow = 'hidden'; 
       } else {
-        document.body.style.overflow = 'auto'; // Aktifkan scroll di halaman lain
+        document.body.style.overflow = 'auto'; 
       }
     }, [location]);
 
@@ -28,7 +30,9 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/home/satrov" element={<ProfileSatrov />} />
+          <Route path="/more-ekskul" element={<EskulLainnya />} />
+          <Route path="/home/satryarover" element={<ProfileSatrov />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Wrapper>
     </Router>

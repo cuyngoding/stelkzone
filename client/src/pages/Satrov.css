@@ -1,3 +1,7 @@
+.satrov-page {
+    max-height: 100vh;
+}
+
 .logo-eskul {
     border-radius: 1000px;
     width: 230px;
@@ -9,9 +13,51 @@
 }
 .nama-eskul {
 position: relative;
-top: 95px;
+top: 85px;
+font-size: 2rem;
 }
 .desc-label-eskul {
     position: relative;
-    top: 4rem;
+    top: 7.500rem;
+    right: 19rem;
+}
+
+.desc-eskul {
+    position: relative;
+    top: 7rem;
+    right: 20rem;
+    font-size: 1rem;
+    background-color: #FFCACA;
+    border-radius: 20px;
+    box-shadow: 4px 3px 10px 0px rgba(0, 0, 0, 0.458);
+    width: 400px;
+    padding: 20px;   
+}
+
+.structure-satrov {
+    position: relative;
+    left: 20rem;
+    bottom: 8.700rem;
+    font-size: 1rem;
+    border-radius: 20px;
+    width: 400px;
+    padding: 20px;   
+}
+.pembina {
+    font-weight: 600;
+    margin: 10px 0px 10px 0px;
+}
+
+.value-satrov {
+    padding: 5px;    
+    width: 400px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 30px;
+    outline: none;
+    border: 2px solid #d1d1d1;
+}
+
+.ketua {
+    font-weight: 600;
 }
