@@ -16,7 +16,7 @@ function Navbar() {
   };
 
   const toprofile = () => {
-    navigate('/profile');
+    navigate('/profile/siswa');
   }
 
   const toggleSidebar = () => {
@@ -31,7 +31,7 @@ function Navbar() {
         </button>
         <div className="profile">
           <img className="user-photo" src={PhotoProfile} alt="User  Profile" onClick={toprofile} />
-          <a href="/profile" className="user-name">BACO ANDAYANA BIN BASO</a>
+          <a href="/profile/siswa" className="user-name">BACO ANDAYANA BIN BASO</a>
         </div>
         <button className="btn-logout" onClick={handleLogout}>
           Log out
@@ -40,8 +40,8 @@ function Navbar() {
 
       <div className={`sidebar-offcanvas-container ${isSidebarVisible ? 'visible' : ''}`}>
         <ul>
-          <li><a href="/home"> <span><GoHomeFill/></span> Home</a></li>
-          <li><a href="/profile"> <span><FaUser /></span> Profile</a></li>
+          <li><a href="/dashboard/siswa"> <span><GoHomeFill/></span> Dashboard</a></li>
+          <li><a href="/profile/siswa"> <span><FaUser /></span> Profile</a></li>
           <li><a href="/more-ekskul"><span className="icon-navigation-eskul"><FaUsersGear/></span> Ekskul lainnya</a></li>
         </ul>
       </div>

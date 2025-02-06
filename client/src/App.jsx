@@ -28,8 +28,8 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard/siswa" element={<Home />} />
+          <Route path="/profile/siswa" element={<Profile />} />
           <Route path="/more-ekskul" element={<EskulLainnya />} />
           <Route path="/home/satryarover" element={<ProfileSatrov />} />
           <Route path="*" element={<NotFound />} />

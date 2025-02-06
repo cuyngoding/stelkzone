@@ -7,7 +7,7 @@ function Login() {
 
   const handleLogin = () => {
     // lakukan validasi login di sini
-    navigate("/home"); // navigasi ke halaman Home
+    navigate("/dashboard/siswa"); // navigasi ke halaman Home
   };
   // function login baru code testingnya untuk memastikan navigasi berjalan atau tidak belum untuk memvalidasi
 

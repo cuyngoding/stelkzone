@@ -44,20 +44,19 @@ font-size: 2rem;
     padding: 20px;   
 }
 .pembina {
-    font-weight: 600;
+    font-weight: 700;
     margin: 10px 0px 10px 0px;
 }
 
 .value-satrov {
     padding: 5px;    
     width: 400px;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1rem;;
     border-radius: 30px;
     outline: none;
     border: 2px solid #d1d1d1;
 }
 
 .ketua {
-    font-weight: 600;
+    font-weight: 700;
 }
