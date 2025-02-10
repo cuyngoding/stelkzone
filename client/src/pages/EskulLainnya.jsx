@@ -6,15 +6,19 @@ import Capture from "../assets/capture.png";
 import Gradasi from "../assets/gradasi.png";
 import Pastelk from "../assets/pastelk.png";
 import Elips from "../assets/elips.png";
+import Ikramtel from "../assets/ikramtel.png";
+import Komers from "../assets/komers.png";
 
 function EskulLainnya() {
   const eskuls = [
     { name: "SATRYA ROVER (PRAMUKA)", icon: SatryaRover, days: "JUMAT", members: 13 },
     { name: "PASKIBRA STELK (PASTELK)", icon: Pastelk, days: "JUMAT, SABTU", members: 20 },
-    { name: "MENGGAMBAR (GRADASI)", icon: Gradasi, days: "JUMAT", members: 15 },
-    { name: "FOTOGRAFI (CAPTURE)", icon: Capture, days: "JUMAT", members: 11 },
+    { name: "MENGGAMBAR (GRADASI)", icon: Gradasi, days: "JUMAT", members: 12 },
+    { name: "FOTOGRAFI (CAPTURE)", icon: Capture, days: "JUMAT", members: 9 },
     { name: "ROBOTIK (ELIPS)", icon: Elips, days: "JUMAT", members: 15 },
-    { name: "REKAYASA WEB (WEB TECHNOLOGY)", icon: WebTech, days: "JUMAT", members: 13 },
+    { name: "REKAYASA WEB (WEB TECHNOLOGY)", icon: WebTech, days: "JUMAT", members: 10 },
+    { name: "ISLAMI (IKRAMTEL)", icon: Ikramtel, days: "JUMAT", members: 13 },
+    { name: "JURNALISTIK (KOMERS)", icon: Komers, days: "JUMAT", members: 13 },
   ];
 
   return (

@@ -7,6 +7,7 @@ import ProfileSatrov from './pages/Satrov';
 import './App.css';
 import NotFound from './pages/NotFound';
 import EskulLainnya from './pages/EskulLainnya';
+import SatrovDaftar from './pages/SatrovDaftar';
 
 function App() {
   const Wrapper = ({ children }) => {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/profile/siswa" element={<Profile />} />
           <Route path="/more-ekskul" element={<EskulLainnya />} />
           <Route path="/home/satryarover" element={<ProfileSatrov />} />
+          <Route path="/more-ekskul/Daftar/satryarover" element={<SatrovDaftar />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Wrapper>

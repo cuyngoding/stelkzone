@@ -1,0 +1,19 @@
+.daftar-btn {
+    background-color: #B90303;
+    color: white;
+    font-weight: 700;
+    border-radius: 50px;
+    border: none;
+    height: 40px;
+    width: 350px;
+    position: relative;
+    top: 80px;
+    left: 40px;
+    transition: 0.3s ease-in-out;
+}
+
+.daftar-btn:hover {
+    background-color: #8c0303;
+    cursor: pointer;
+    color: rgb(184, 183, 183);
+}
