@@ -33,7 +33,7 @@ function App() {
           <Route path="/profile/siswa" element={<Profile />} />
           <Route path="/more-ekskul" element={<EskulLainnya />} />
           <Route path="/home/satryarover" element={<ProfileSatrov />} />
-          <Route path="/more-ekskul/Daftar/satryarover" element={<SatrovDaftar />} />
+          <Route path="/more-ekskul/daftar/satryarover" element={<SatrovDaftar />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Wrapper>

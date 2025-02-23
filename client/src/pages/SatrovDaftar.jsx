@@ -1,23 +1,29 @@
 import Navbar from "../components/Navbar"
 import SatryaRover from "../assets/satrya-rover.png";
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import './SatrovDaftar.css'
 
-const handleDaftar = () => {
+const handleDaftar = (navigate) => {
     Swal.fire({
         title: "Berhasil Daftar",
         text: "Anda berhasil daftar",
         icon: "success"
-      });
+    }).then(() => {
+        navigate('/home/satryarover');
+    });
 }
+
 function SatrovDaftar() {
+  const navigate = useNavigate();
+
   return (
     <>
     <div className="satrov-page">
     <Navbar />
     <img className="logo-eskul" src={SatryaRover} alt="" />
     <h1 className="nama-eskul">PRAMUKA (SATRYA ROVER)</h1>
-    <button className="daftar-btn" onClick={handleDaftar}>DAFTAR</button>
+    <button className="daftar-btn" onClick={() => handleDaftar(navigate)}>DAFTAR</button>
     <h3 className="desc-label-eskul">Description</h3>
     <p className="desc-eskul">Ekstrakurikuler Pramuka Ambalan SATRYA ROVER di SMK Telkom Makassar mengembangkan kepemimpinan, kedisiplinan, dan kebersamaan melalui latihan rutin, perkemahan, dan program yang membentuk karakter serta keterampilan anggota untuk menghadapi tantangan.</p>
     <div className="structure-satrov">

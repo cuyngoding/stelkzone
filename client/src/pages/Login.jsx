@@ -16,7 +16,7 @@ function Login() {
       <div className="login-page">
         <div className="login-container">
           <img src={ImageLogo} alt="logo SMK Telkom Makassar" />
-          <input type="email" placeholder="Your Email" />
+          <input type="text" placeholder="Your Username" />
           <input type="password" placeholder="Your Password" />
           <p className="check">
             <input type="checkbox" name="Remember me" /> Remember me
