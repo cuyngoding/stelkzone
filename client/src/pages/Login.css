@@ -15,8 +15,8 @@ body {
     background-color: #fefefe;
     border: 1px solid #e0dede; 
     padding: 20px;
-    margin-top: 63px;
-    margin-left: 550px;
+    margin-top: 75px;
+    margin-left: 610px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.1);
     width: 400px;
@@ -96,7 +96,7 @@ body {
     position: relative;
     left: 0rem;
     bottom: 3.200rem;
-    width: 1550px;
+    width: 1650px;
     height: 100%;
     overflow: hidden;
 }
