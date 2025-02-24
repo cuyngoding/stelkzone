@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:8000/api"; // Sesuaikan dengan backend Laravel
+const API_URL = "http://127.0.0.1:8000/api"; // Sesuaikan dengan URL backend Laravel
 
 export const login = async (email, password) => {
   try {
