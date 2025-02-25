@@ -4,10 +4,7 @@ const API_URL = "http://127.0.0.1:8000/api"; // Sesuaikan dengan URL backend Lar
 
 export const login = async (email, password) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, {
-      email,
-      password,
-    });
+    const response = await axios.post(`${API_URL}/login`, { email, password });
 
     const { access_token, user } = response.data;
     localStorage.setItem("token", access_token);
@@ -19,9 +16,27 @@ export const login = async (email, password) => {
   }
 };
 
-export const logout = () => {
+export const logout = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      await axios.post(
+        `${API_URL}/logout`,
+        {}, // Body kosong
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+    }
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+
+  // Hapus data di localStorage dan redirect ke halaman login
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+  window.location.href = "/";
 };
 
 export const getToken = () => localStorage.getItem("token");
