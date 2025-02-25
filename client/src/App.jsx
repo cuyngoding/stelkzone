@@ -8,6 +8,7 @@ import './App.css';
 import NotFound from './pages/NotFound';
 import EskulLainnya from './pages/EskulLainnya';
 import SatrovDaftar from './pages/SatrovDaftar';
+import DashboardPembina from './pages/HomePembina'
 
 function App() {
   const Wrapper = ({ children }) => {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/home/satryarover" element={<ProfileSatrov />} />
           <Route path="/more-ekskul/daftar/satryarover" element={<SatrovDaftar />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/dashboard/pembina" element={<DashboardPembina/>}/>
         </Routes>
       </Wrapper>
     </Router>

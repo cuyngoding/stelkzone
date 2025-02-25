@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
-import "./NotFound.css"; // Impor file CSS
+import { useEffect } from "react";
+import "./NotFound.css";
 
 const NotFound = () => {
+  useEffect(() => {
+    console.log("%cError 404 Not Found", "color: red; font-weight: bold;");
+  }, []);
+
   return (
     <div className="not-found-container">
       <h1 className="not-found-title">404</h1>

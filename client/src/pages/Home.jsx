@@ -9,7 +9,7 @@ import Pastelk from "../assets/pastelk.png";
 import Elips from "../assets/elips.png";
 import Ikramtel from "../assets/ikramtel.png";
 import Komers from "../assets/komers.png";
-// import Cyberdev from "../assets/cyberdev.jpg"; // Import langsung tanpa dynamic import
+
 
 function Home() {
   const navigate = useNavigate();
@@ -20,7 +20,6 @@ function Home() {
 
   const errorCheck = () => {
     navigate("/error");
-    console.log("%cError 404 Not Found", "color: red; font-weight: bold;");
   };
 
   return (
