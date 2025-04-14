@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Navbar from "../components/Navbar";
+import { checkAuth } from "../utils/api";
+import { getToken } from "../utils/auth"; // Import fungsi getToken
 import SatryaRover from "../assets/satrya-rover.png";
 import WebTech from "../assets/web-tech.png";
 import Capture from "../assets/capture.png";
@@ -9,19 +12,37 @@ import Pastelk from "../assets/pastelk.png";
 import Elips from "../assets/elips.png";
 import Ikramtel from "../assets/ikramtel.png";
 import Komers from "../assets/komers.png";
+import Cyberdef from "../assets/cyberdef.png";
+
 
 
 function Home() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const verifyUser = async () => {
+      const result = await checkAuth();
+      console.log("✅ checkAuth result:", result);
+      if (!result.success) {
+        navigate("/");
+      }
+    };
+  
+    verifyUser();
+  }, [navigate]);
+  
+
   const handleCheck = () => {
+    console.log("Satrya Rover clicked");
     navigate("/home/satryarover");
   };
-
+  
   const errorCheck = () => {
+    console.log("Eskul lainnya clicked");
     navigate("/error");
   };
-
+  
+  
   return (
     <>
       <div className="home-page">
@@ -36,8 +57,6 @@ function Home() {
           <input
             className="search-bar"
             type="text"
-            name=""
-            id="search"
             placeholder="Search . . ."
           />
           <button type="search" id="go-search-btn">
@@ -108,8 +127,8 @@ function Home() {
             </div>
 
             <div className="card">
-              <img src={SatryaRover} alt="Cyber Security" />
-              <h3>CYBER SECURITY (CYBERDEV)</h3>
+              <img src={Cyberdef} alt="Cyber Security" />
+              <h3>CYBER SECURITY (CYBERDEF)</h3>
               <p className="jumlah-anggota">Jumlah: 15</p>
               <button type="button">CHECK</button>
             </div>

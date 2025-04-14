@@ -1,44 +1,43 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:8000/api"; // Sesuaikan dengan URL backend Laravel
+export const getToken = () => {
+  const token = localStorage.getItem("token");
+  return token && token !== "undefined" ? token : null;
+};
 
 export const login = async (email, password) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, { email, password });
+    const response = await fetch("http://localhost:8000/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-    const { access_token, user } = response.data;
-    localStorage.setItem("token", access_token);
-    localStorage.setItem("user", JSON.stringify(user));
+    const data = await response.json();
+    console.log("DATA LOGIN", data); // Debug hasil response
 
-    return { success: true, user };
-  } catch (error) {
-    return { success: false, message: error.response?.data?.message || "Login failed" };
-  }
-};
-
-export const logout = async () => {
-  try {
-    const token = localStorage.getItem("token");
+    // Ambil token dari response: bisa dari `token` atau `access_token`
+    const token = data.token || data.access_token;
 
     if (token) {
-      await axios.post(
-        `${API_URL}/logout`,
-        {}, // Body kosong
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-    }
-  } catch (error) {
-    console.error("Logout error:", error);
-  }
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      return { success: true, token, user: data.user };
 
-  // Hapus data di localStorage dan redirect ke halaman login
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-  window.location.href = "/";
+    } else {
+      console.error("Token tidak ditemukan dalam response");
+      return { success: false, message: "Token tidak ditemukan." };
+    }
+  } catch (err) {
+    console.error("Login error:", err);
+    return { success: false, message: err.message };
+  }
 };
 
-export const getToken = () => localStorage.getItem("token");
+export const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+};
 
-export const getUser = () => JSON.parse(localStorage.getItem("user"));
+export const getUser = () => {
+  const user = localStorage.getItem("user");
+  return user ? JSON.parse(user) : null;
+};

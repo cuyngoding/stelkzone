@@ -8,7 +8,8 @@ import './App.css';
 import NotFound from './pages/NotFound';
 import EskulLainnya from './pages/EskulLainnya';
 import SatrovDaftar from './pages/SatrovDaftar';
-import DashboardPembina from './pages/HomePembina'
+import DashboardPembina from './pages/HomePembina';
+import PrivateRoute from './utils/PrivateRoute'
 
 function App() {
   const Wrapper = ({ children }) => {
@@ -30,6 +31,7 @@ function App() {
       <Wrapper>
         <Routes>
           <Route path="/" element={<Login />} />
+          {/* <Route element={<PrivateRoute />}></Route> */}
           <Route path="/dashboard/siswa" element={<Home />} />
           <Route path="/profile/siswa" element={<Profile />} />
           <Route path="/more-ekskul" element={<EskulLainnya />} />

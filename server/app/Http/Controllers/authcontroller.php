@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class AuthController extends Controller 
 {
     public function register(Request $request)
     {
@@ -23,7 +23,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return response()->json(['user' => $user, 'message' => 'User registered successfully']);
+        return response()->json([
+            'user' => $user,
+            'message' => 'User registered successfully'
+        ]);
     }
 
     public function login(Request $request)
@@ -39,7 +42,10 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        $token = $user->createToken('token')->plainTextToken;
+        // Hapus semua token lama sebelum login baru
+        //$user->tokens()->delete();
+
+        $token = $user->createToken('authToken')->plainTextToken;
 
         return response()->json([
             'token' => $token,
@@ -49,15 +55,21 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-        return response()->json([
-            'message' => 'Logout berhasil'
-        ]);
+        if ($request->user()) {
+            $request->user()->tokens()->delete();
+            return response()->json(['message' => 'Logout berhasil'], 200);
+        }
+
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
 
     public function user()
     {
-        $data = User::find(auth()->user()->id);
-        return response()->json($data);
+        $user = auth()->user();
+        
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        return response()->json(auth()->user());
     }
 }

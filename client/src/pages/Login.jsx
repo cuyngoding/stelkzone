@@ -1,16 +1,28 @@
 import "./Login.css";
-import { useState } from "react";
+import React,{ useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { login } from "../utils/auth";
 import ImageLogo from "../assets/logo_smk.png";
 
+
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogin = async () => {
+  // Load email from local storage if "Remember Me" was checked
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("savedEmail");
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setRememberMe(true);
+    }
+  }, []);
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent default form submission
     if (!email || !password) {
       Swal.fire({
         icon: "warning",
@@ -22,8 +34,12 @@ function Login() {
 
     try {
       const response = await login(email, password);
-      if (response.success) {
-        localStorage.setItem("token", response.token);
+if (response.success) {
+  if (rememberMe) {
+    localStorage.setItem("savedEmail", email);
+  } else {
+    localStorage.removeItem("savedEmail");
+  }
         Swal.fire({
           icon: "success",
           title: "Berhasil!",
@@ -37,14 +53,14 @@ function Login() {
         Swal.fire({
           icon: "error",
           title: "Login Gagal!",
-          text: response.message,
+          text: response.message || "Silakan coba lagi.",
         });
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Terjadi Kesalahan!",
-        text: "Silakan coba lagi nanti.",
+        text: error.response?.data?.message || "Silakan coba lagi nanti.",
       });
     }
   };
@@ -53,24 +69,31 @@ function Login() {
     <div className="login-page">
       <div className="login-container">
         <img src={ImageLogo} alt="logo SMK Telkom Makassar" />
-        <input
-          type="email"
-          placeholder="Your Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Your Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p className="check">
-          <input type="checkbox" name="Remember me" /> Remember me
-        </p>
-        <button type="submit" onClick={handleLogin}>
-          Login
-        </button>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Your Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <p className="check">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />{" "}
+            Remember me
+          </p>
+          <button type="submit">Login</button>
+        </form>
       </div>
       <div className="wave">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
