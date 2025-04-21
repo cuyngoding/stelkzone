@@ -1,9 +1,5 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
-import Navbar from "../components/Navbar";
-import { checkAuth } from "../utils/api";
-import { getToken } from "../utils/auth"; // Import fungsi getToken
+import NavbarAdmin from "../components/NavbarAdmin";
 import SatryaRover from "../assets/satrya-rover.png";
 import WebTech from "../assets/web-tech.png";
 import Capture from "../assets/capture.png";
@@ -14,41 +10,25 @@ import Ikramtel from "../assets/ikramtel.png";
 import Komers from "../assets/komers.png";
 import Cyberdef from "../assets/cyberdef.png";
 
-
-
-function Home() {
+function HomeAdmin() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const verifyUser = async () => {
-      const result = await checkAuth();
-      console.log("✅ checkAuth result:", result);
-      if (!result.success) {
-        navigate("/");
-      }
-    };
-  
-    verifyUser();
-  }, [navigate]);
-  
 
   const handleCheck = () => {
     console.log("Satrya Rover clicked");
-    navigate("/dashboard/siswa/profile-eskul/satryarover");
+    // navigate("/dashboard/admin/profile-eskul/satryarover");
+    navigate("#");
   };
-  
+
   const errorCheck = () => {
     console.log("Eskul lainnya clicked");
     navigate("/error");
   };
-  
-  
   return (
     <>
       <div className="home-page">
         <div className="home-container">
           <header>
-            <Navbar />
+            <NavbarAdmin />
           </header>
 
           <h3 className="header1">STELKZONE - Dashboard</h3>
@@ -139,4 +119,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeAdmin;

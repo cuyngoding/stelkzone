@@ -1,0 +1,105 @@
+.ekskulLainnya-page {
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 100px; /* Tambahkan margin atas */
+  }
+  
+  .bar-search {
+    width: 70%;
+    max-width: 550px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    font-size: 16px;
+    background-color: #EEEEEE;
+    box-shadow: 0px 10px 12px -8.5px rgba(49, 49, 49, 0.75) inset;
+    position: relative;
+    right: 25.500rem;
+  }
+  
+  .search-btn {
+    padding: 10px;
+    width: 65px;
+    z-index: 5;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+    font-weight: 700;    
+    box-shadow: 0.5px 0px 5px 0px rgba(70, 70, 70, 0.75);
+    margin-left: 10px;
+    position: relative;
+    right: 25rem;
+    transition: 0.3s ease-in-out;
+  }
+  .search-btn:hover {
+    background-color: #dcd9d9;
+    box-shadow: none;
+    cursor: pointer;
+  }
+  .eskul-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    /* max-width: 1000px;  */
+    margin: 0 auto; /* Untuk memposisikan di tengah */
+    margin-top: 10px;
+  }
+  
+  .eskul-item {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    width: 90rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 7px 2px rgba(0,0,0,0.1);
+  }
+  
+  .eskul-icon {
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+  
+  .eskul-info {
+    flex-grow: 1;
+  }
+  
+  .eskul-info h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .eskul-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .eskul-members {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .eskul-members span {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .arrow-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #cc0000;
+  }

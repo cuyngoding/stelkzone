@@ -11,35 +11,39 @@ header {
   bottom: 20px;
 }
 
-.home-container .header1 {
+.home-container .header1-pembina {
   position: relative;
+  right: 350px;
   top: 87px;
   color: #e0e0e0;
   z-index: 5;
 }
 
-.home-container h1 {
+.home-container .header2-pembina {
   position: relative;
+  right: 350px;
   top: 20px;
   z-index: 5;
 }
 
-.search-bar {
+.search-bar-pembina {
   background-color: #eeeeee;
   position: relative;
+  right: 350px;
   top: 10px;
   z-index: 5;
   padding: 9px;
   padding-bottom: 10px;
   width: 550px;
   border: 1px solid #ccc;
+  outline: black;
   border-radius: 9px;
   font-size: 16px;
   background-color: #eeeeee;
   box-shadow: 0px 10px 12px -8.5px rgba(49, 49, 49, 0.75) inset;
 }
 
-#go-search-btn {
+#go-search-btn-pembina {
   padding: 10px;
   width: 65px;
   z-index: 5;
@@ -50,44 +54,47 @@ header {
   box-shadow: 0.5px 0px 5px 0px rgba(70, 70, 70, 0.75);
   position: relative;
   top: 10px;
-  right: 10px;
-  left: 15px;
+  right: 335px;
   transition: 0.3s ease-in-out;
 }
 
-#go-search-btn:hover {
+#go-search-btn-pembina:hover {
   background-color: #dcd9d9;
   box-shadow: none;
   cursor: pointer;
 }
 
-.card-container {
+.card-container-pembina {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 30px;
   margin-top: 50px;
 }
-.card-container .card {
+.card-container-pembina .card-pembina {
   z-index: 1;
   background-color: #fff;
   border: 2px solid #dedbdb;
   border-radius: 15px;
   box-shadow: 2px 4px 3px #dedbdb;
+  position: relative;
+  top: 0px;
+  right: 350px;
   padding: 20px;
+  width: 370px;
   padding-bottom: 100px;
   transition: 0.5s ease-in-out;
 }
 
-.card-container .card:hover {
+.card-container-pembina .card-pembina:hover {
   box-shadow: 2px 5px 5px #abaaaa;
   transform: translateY(-10px);
 }
 
-.card-container .card img {
+.card-container-pembina .card-pembina img {
   width: 370px;
 }
 
-.card-container .card .jumlah-anggota {
+.jumlah-anggota {
   background-color: #dedbdb;
   font-weight: 600;
   font-size: 15px;
@@ -98,7 +105,7 @@ header {
   width: fit-content;
 }
 
-.card-container .card button {
+.card-container-pembina .card-pembina button {
   background-color: #b90303;
   color: white;
   font-weight: 700;
@@ -114,7 +121,7 @@ header {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
-.card-container .card button:hover {
+.card-container-pembina .card-pembina button:hover {
   background-color: #8e0000;
   color: rgb(171, 171, 171);
 }
@@ -130,7 +137,7 @@ header {
   }
 }
 
-.card {
+.card-pembina {
   animation: appear 0.5s ease-in-out;
   animation-timeline: view();
   animation-range: entry 0;

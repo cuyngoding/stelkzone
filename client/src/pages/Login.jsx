@@ -42,8 +42,7 @@ if (response.success) {
   }
         Swal.fire({
           icon: "success",
-          title: "Berhasil!",
-          text: "Login berhasil, Anda akan diarahkan ke dashboard.",
+          title: "Login Berhasil!",
           timer: 2000,
           showConfirmButton: false,
         }).then(() => {
