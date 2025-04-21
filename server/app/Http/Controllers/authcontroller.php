@@ -15,12 +15,14 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
+            'role' => 'in:admin,siswa,pembina' // ✅ validasi role
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'role' => $request->role ?? 'siswa' // ✅ default siswa kalau kosong
         ]);
 
         return response()->json([
@@ -42,14 +44,16 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        // Hapus semua token lama sebelum login baru
-        //$user->tokens()->delete();
-
         $token = $user->createToken('authToken')->plainTextToken;
 
         return response()->json([
             'token' => $token,
-            'user' => $user
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role // ✅ kirim role ke frontend
+            ]
         ]);
     }
 
@@ -70,6 +74,12 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
-        return response()->json(auth()->user());
+
+        return response()->json([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'role' => $user->role // ✅ role untuk frontend redirect
+        ]);
     }
 }

@@ -1,18 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\PembinaController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index']);
 });
+
+Route::middleware(['auth', 'role:siswa'])->group(function () {
+    Route::get('/siswa', [SiswaController::class, 'index']);
+});
+
+Route::middleware(['auth', 'role:pembina'])->group(function () {
+    Route::get('/pembina', [PembinaController::class, 'index']);
+});
+
+
+

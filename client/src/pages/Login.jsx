@@ -1,10 +1,9 @@
 import "./Login.css";
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { login } from "../utils/auth";
 import ImageLogo from "../assets/logo_smk.png";
-
 
 function Login() {
   const navigate = useNavigate();
@@ -12,7 +11,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  // Load email from local storage if "Remember Me" was checked
   useEffect(() => {
     const savedEmail = localStorage.getItem("savedEmail");
     if (savedEmail) {
@@ -22,7 +20,8 @@ function Login() {
   }, []);
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
+
     if (!email || !password) {
       Swal.fire({
         icon: "warning",
@@ -34,19 +33,35 @@ function Login() {
 
     try {
       const response = await login(email, password);
-if (response.success) {
-  if (rememberMe) {
-    localStorage.setItem("savedEmail", email);
-  } else {
-    localStorage.removeItem("savedEmail");
-  }
+
+      if (response.success) {
+        const { token, user } = response;
+
+        // Simpan token
+        localStorage.setItem("token", token);
+
+        // Ubah role jadi string agar lebih mudah digunakan di App.jsx
+        const roleMap = { 1: "siswa", 2: "pembina", 3: "admin" };
+        const mappedUser = { ...user, role: roleMap[user.role] || user.role };
+
+        // Simpan user ke localStorage
+        localStorage.setItem("user", JSON.stringify(mappedUser));
+
+        if (rememberMe) {
+          localStorage.setItem("savedEmail", email);
+        } else {
+          localStorage.removeItem("savedEmail");
+        }
+
         Swal.fire({
           icon: "success",
           title: "Login Berhasil!",
           timer: 2000,
           showConfirmButton: false,
         }).then(() => {
-          navigate("/dashboard/siswa");
+          if (mappedUser.role === "admin") navigate("/dashboard/admin");
+          else if (mappedUser.role === "pembina") navigate("/dashboard/pembina");
+          else navigate("/dashboard/siswa");
         });
       } else {
         Swal.fire({

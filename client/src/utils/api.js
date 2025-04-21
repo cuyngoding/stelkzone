@@ -1,6 +1,6 @@
 import { getToken, logout } from "./auth"; // ✅ tambahkan logout
 
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = "http://127.0.0.1:8000/api";
 
 export const checkAuth = async () => {
   const token = getToken();
