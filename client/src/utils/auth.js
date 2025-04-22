@@ -1,3 +1,5 @@
+// utils/auth.js
+
 export const getToken = () => {
   const token = localStorage.getItem("token");
   return token && token !== "undefined" ? token : null;
@@ -17,14 +19,13 @@ export const login = async (email, password) => {
     // Ambil token dari response: bisa dari `token` atau `access_token`
     const token = data.token || data.access_token;
 
-    if (token) {
+    if (token && data.user) {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(data.user));
       return { success: true, token, user: data.user };
-
     } else {
-      console.error("Token tidak ditemukan dalam response");
-      return { success: false, message: "Token tidak ditemukan." };
+      console.error("Token atau user tidak ditemukan dalam response");
+      return { success: false, message: "Login gagal. Cek email/password." };
     }
   } catch (err) {
     console.error("Login error:", err);
@@ -32,12 +33,22 @@ export const login = async (email, password) => {
   }
 };
 
-export const logout = () => {
+// ✅ Logout bisa menerima setRole (opsional) dan redirect
+export const logout = (setRole = null) => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+
+  if (setRole) setRole(null);
+
+  // Paksa reload atau redirect ke halaman utama
+  window.location.href = "/";
 };
 
 export const getUser = () => {
   const user = localStorage.getItem("user");
-  return user ? JSON.parse(user) : null;
+  try {
+    return user ? JSON.parse(user) : null;
+  } catch {
+    return null;
+  }
 };
