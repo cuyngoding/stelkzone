@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-// Import pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
@@ -22,9 +21,10 @@ import DashboardPembina from "./pages/HomePembina";
 import DashboardAdmin from "./pages/HomeAdmin";
 import DaftarSiswaPembina from "./pages/DaftarSiswaPembina";
 
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
-// Komponen untuk redirect berdasarkan role
+// Redirect otomatis berdasarkan role
 const RedirectByRole = ({ role }) => {
   if (role === "admin") return <Navigate to="/dashboard/admin" />;
   if (role === "pembina") return <Navigate to="/dashboard/pembina" />;
@@ -32,17 +32,15 @@ const RedirectByRole = ({ role }) => {
   return <Login />;
 };
 
-// Wrapper untuk guard dan scroll handling
+// Wrapper untuk mengatur scroll & redirect kalau belum login
 const Wrapper = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Control scroll overflow
     document.body.style.overflow =
       location.pathname === "/" ? "hidden" : "auto";
 
-    // Guard: jika tidak di halaman login dan tidak ada token, redirect
     if (location.pathname !== "/" && !localStorage.getItem("token")) {
       navigate("/", { replace: true });
     }
@@ -63,8 +61,7 @@ function App() {
       try {
         const parsedUser = JSON.parse(userData);
         setRole(parsedUser.role);
-      } catch (err) {
-        console.error("Failed to parse user data:", err);
+      } catch {
         setRole(null);
       }
     } else {
@@ -74,44 +71,90 @@ function App() {
     setLoading(false);
   }, []);
 
-  if (loading) return null; // atau tampilkan loading spinner
+  if (loading) return null;
 
   return (
     <Router>
       <Wrapper>
         <Routes>
-          {/* Landing / Login + Redirect */}
           <Route path="/" element={<RedirectByRole role={role} />} />
 
-          {/* DASHBOARD ROUTES */}
-          <Route path="/dashboard/siswa" element={<Home />} />
-          <Route path="/dashboard/pembina" element={<DashboardPembina />} />
+          {/* Dashboard */}
+          <Route
+            path="/dashboard/siswa"
+            element={
+              <ProtectedRoute allowedRoles={["siswa"]}>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/pembina"
+            element={
+              <ProtectedRoute allowedRoles={["pembina"]}>
+                <DashboardPembina />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/dashboard/pembina/daftar-siswa"
-            element={<DaftarSiswaPembina />}
+            element={
+              <ProtectedRoute allowedRoles={["pembina"]}>
+                <DaftarSiswaPembina />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/dashboard/admin" element={<DashboardAdmin />} />
+          <Route
+            path="/dashboard/admin"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <DashboardAdmin />
+              </ProtectedRoute>
+            }
+          />
 
-          {/* PROFILE ROUTES */}
-          <Route path="/profile/siswa" element={<Profile />} />
-          <Route path="/profile/pembina" element={<ProfilePembina />} />
+          {/* Profile */}
+          <Route
+            path="/profile/siswa"
+            element={
+              <ProtectedRoute allowedRoles={["siswa"]}>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/pembina"
+            element={
+              <ProtectedRoute allowedRoles={["pembina"]}>
+                <ProfilePembina />
+              </ProtectedRoute>
+            }
+          />
 
-          {/* ESKUL ROUTES */}
+          {/* Ekskul */}
           <Route path="/more-ekskul" element={<EskulLainnya />} />
           <Route
             path="/dashboard/siswa/profile-eskul/satryarover"
-            element={<ProfileSatrov />}
+            element={
+              <ProtectedRoute allowedRoles={["siswa"]}>
+                <ProfileSatrov />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/dashboard/pembina/profile-eskul/satryarover"
-            element={<ProfileSatrovPembina />}
+            element={
+              <ProtectedRoute allowedRoles={["pembina"]}>
+                <ProfileSatrovPembina />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/more-ekskul/daftar/satryarover"
             element={<SatrovDaftar />}
           />
 
-          {/* NOT FOUND */}
+          {/* Not Found */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Wrapper>
