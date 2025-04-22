@@ -4,9 +4,11 @@ import {
   Routes,
   useLocation,
   Navigate,
-  useNavigate,          // ← ditambahkan
+  useNavigate,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+// Import pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
@@ -19,27 +21,39 @@ import SatrovDaftar from "./pages/SatrovDaftar";
 import DashboardPembina from "./pages/HomePembina";
 import DashboardAdmin from "./pages/HomeAdmin";
 import DaftarSiswaPembina from "./pages/DaftarSiswaPembina";
+
 import "./App.css";
+
+// Komponen untuk redirect berdasarkan role
+const RedirectByRole = ({ role }) => {
+  if (role === "admin") return <Navigate to="/dashboard/admin" />;
+  if (role === "pembina") return <Navigate to="/dashboard/pembina" />;
+  if (role === "siswa") return <Navigate to="/dashboard/siswa" />;
+  return <Login />;
+};
+
+// Wrapper untuk guard dan scroll handling
+const Wrapper = ({ children }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Control scroll overflow
+    document.body.style.overflow =
+      location.pathname === "/" ? "hidden" : "auto";
+
+    // Guard: jika tidak di halaman login dan tidak ada token, redirect
+    if (location.pathname !== "/" && !localStorage.getItem("token")) {
+      navigate("/", { replace: true });
+    }
+  }, [location, navigate]);
+
+  return children;
+};
 
 function App() {
   const [role, setRole] = useState(null);
-
-  const Wrapper = ({ children }) => {
-    const location = useLocation();
-    const navigate = useNavigate();               // ← ditambahkan
-
-    useEffect(() => {
-      document.body.style.overflow =
-        location.pathname === "/" ? "hidden" : "auto";
-
-      // ← SIMPLE GUARD: kalau bukan halaman login dan token hilang, redirect ke "/"
-      if (location.pathname !== "/" && !localStorage.getItem("token")) {
-        navigate("/", { replace: true });
-      }
-    }, [location, navigate]);
-
-    return children;
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -56,26 +70,18 @@ function App() {
     } else {
       setRole(null);
     }
+
+    setLoading(false);
   }, []);
+
+  if (loading) return null; // atau tampilkan loading spinner
 
   return (
     <Router>
       <Wrapper>
         <Routes>
-          <Route
-            path="/"
-            element={
-              role === "admin" ? (
-                <Navigate to="/dashboard/admin" />
-              ) : role === "pembina" ? (
-                <Navigate to="/dashboard/pembina" />
-              ) : role === "siswa" ? (
-                <Navigate to="/dashboard/siswa" />
-              ) : (
-                <Login />
-              )
-            }
-          />
+          {/* Landing / Login + Redirect */}
+          <Route path="/" element={<RedirectByRole role={role} />} />
 
           {/* DASHBOARD ROUTES */}
           <Route path="/dashboard/siswa" element={<Home />} />
