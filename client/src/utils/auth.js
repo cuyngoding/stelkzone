@@ -42,6 +42,7 @@ export const logout = (setRole = null) => {
 
   // Paksa reload atau redirect ke halaman utama
   window.location.href = "/";
+  window.location.reload();
 };
 
 export const getUser = () => {

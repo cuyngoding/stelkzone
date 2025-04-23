@@ -13,16 +13,63 @@ import Cyberdef from "../assets/cyberdef.png";
 function HomeAdmin() {
   const navigate = useNavigate();
 
-  const handleCheck = () => {
-    console.log("Satrya Rover clicked");
-    // navigate("/dashboard/admin/profile-eskul/satryarover");
-    navigate("#");
-  };
+  const ekskulList = [
+    {
+      title: "PRAMUKA (SATRYA ROVER)",
+      jumlah: 13,
+      img: SatryaRover,
+      onClick: () => navigate("/dashboard/admin/profile-eskul/satryarover"),
+    },
+    {
+      title: "REKAYASA WEB (WEB TECHNOLOGY)",
+      jumlah: 10,
+      img: WebTech,
+      onClick: () => navigate("/error"),
+    },
+    {
+      title: "FOTOGRAFI (CAPTURE)",
+      jumlah: 9,
+      img: Capture,
+      onClick: () => navigate("/error"),
+    },
+    {
+      title: "MENGGAMBAR (GRADASI STELK)",
+      jumlah: 12,
+      img: Gradasi,
+      onClick: () => {}, // nanti bisa ditambah navigasi
+    },
+    {
+      title: "PASKIBRA STELK (PASTELK)",
+      jumlah: 20,
+      img: Pastelk,
+      onClick: () => {},
+    },
+    {
+      title: "ROBOTIK (ELIPS)",
+      jumlah: 7,
+      img: Elips,
+      onClick: () => {},
+    },
+    {
+      title: "ISLAMI (IKRAMTEL)",
+      jumlah: 13,
+      img: Ikramtel,
+      onClick: () => {},
+    },
+    {
+      title: "JURNALISTIK (KOMERS)",
+      jumlah: 13,
+      img: Komers,
+      onClick: () => {},
+    },
+    {
+      title: "CYBER SECURITY (CYBERDEF)",
+      jumlah: 15,
+      img: Cyberdef,
+      onClick: () => {},
+    },
+  ];
 
-  const errorCheck = () => {
-    console.log("Eskul lainnya clicked");
-    navigate("/error");
-  };
   return (
     <>
       <div className="home-page">
@@ -33,7 +80,7 @@ function HomeAdmin() {
 
           <h3 className="header1">STELKZONE - Dashboard</h3>
           <br />
-          <h1>EKSTRAKURIKULER SAYA</h1>
+          <h1>EKSTRAKURIKULER</h1>
           <input
             className="search-bar"
             type="text"
@@ -44,74 +91,16 @@ function HomeAdmin() {
           </button>
 
           <div className="card-container">
-            <div className="card">
-              <img src={SatryaRover} alt="Satrya Rover" />
-              <h3>PRAMUKA (SATRYA ROVER)</h3>
-              <p className="jumlah-anggota">Jumlah: 13</p>
-              <button type="button" onClick={handleCheck}>
-                CHECK
-              </button>
-            </div>
-
-            <div className="card">
-              <img src={WebTech} alt="Web Technology" />
-              <h3>REKAYASA WEB (WEB TECHNOLOGY)</h3>
-              <p className="jumlah-anggota">Jumlah: 10</p>
-              <button type="button" onClick={errorCheck}>
-                CHECK
-              </button>
-            </div>
-
-            <div className="card">
-              <img src={Capture} alt="Capture" />
-              <h3>FOTOGRAFI (CAPTURE)</h3>
-              <p className="jumlah-anggota">Jumlah: 9</p>
-              <button type="button" onClick={errorCheck}>
-                CHECK
-              </button>
-            </div>
-
-            <div className="card">
-              <img src={Gradasi} alt="Gradasi Stelk" />
-              <h3>MENGGAMBAR (GRADASI STELK)</h3>
-              <p className="jumlah-anggota">Jumlah: 12</p>
-              <button type="button">CHECK</button>
-            </div>
-
-            <div className="card">
-              <img src={Pastelk} alt="Pastelk" />
-              <h3>PASKIBRA STELK (PASTELK)</h3>
-              <p className="jumlah-anggota">Jumlah: 20</p>
-              <button type="button">CHECK</button>
-            </div>
-
-            <div className="card">
-              <img src={Elips} alt="Elips" />
-              <h3>ROBOTIK (ELIPS)</h3>
-              <p className="jumlah-anggota">Jumlah: 7</p>
-              <button type="button">CHECK</button>
-            </div>
-
-            <div className="card">
-              <img src={Ikramtel} alt="Ikramtel" />
-              <h3>ISLAMI (IKRAMTEL)</h3>
-              <p className="jumlah-anggota">Jumlah: 13</p>
-              <button type="button">CHECK</button>
-            </div>
-
-            <div className="card">
-              <img src={Komers} alt="Komers" />
-              <h3>JURNALISTIK (KOMERS)</h3>
-              <p className="jumlah-anggota">Jumlah: 13</p>
-              <button type="button">CHECK</button>
-            </div>
-
-            <div className="card">
-              <img src={Cyberdef} alt="Cyber Security" />
-              <h3>CYBER SECURITY (CYBERDEF)</h3>
-              <p className="jumlah-anggota">Jumlah: 15</p>
-              <button type="button">CHECK</button>
-            </div>
+            {ekskulList.map((ekskul, index) => (
+              <div className="card" key={index}>
+                <img src={ekskul.img} alt={ekskul.title} />
+                <h3>{ekskul.title}</h3>
+                <p className="jumlah-anggota">Jumlah: {ekskul.jumlah}</p>
+                <button type="button" onClick={ekskul.onClick}>
+                  CHECK
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>

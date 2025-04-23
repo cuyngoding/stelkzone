@@ -20,7 +20,11 @@ import SatrovDaftar from "./pages/SatrovDaftar";
 import DashboardPembina from "./pages/HomePembina";
 import DashboardAdmin from "./pages/HomeAdmin";
 import DaftarSiswaPembina from "./pages/DaftarSiswaPembina";
-
+import DaftarSiswaAdmin from "./pages/DaftarSiswaAdmin";
+import DaftarPembinaAdmin from "./pages/DaftarPembinaAdmin";
+import ProfileAdmin from "./pages/ProfileAdmin";
+import ProfileSiswaPembina from "./pages/ProfileSiswaPembina";
+import ProfileSiswaAdmin from "./pages/ProfileSiswaAdmin";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
@@ -105,6 +109,24 @@ function App() {
             }
           />
           <Route
+            path="/dashboard/admin/daftar-siswa"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <DaftarSiswaAdmin />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard/admin/daftar-pembina"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <DaftarPembinaAdmin />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path="/dashboard/admin"
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
@@ -130,7 +152,30 @@ function App() {
               </ProtectedRoute>
             }
           />
-
+          <Route
+            path="/profile/admin"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <ProfileAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile-siswa/pembina"
+            element={
+              <ProtectedRoute allowedRoles={["pembina"]}>
+                <ProfileSiswaPembina />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile-siswa/admin"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <ProfileSiswaAdmin />
+              </ProtectedRoute>
+            }
+          />
           {/* Ekskul */}
           <Route path="/more-ekskul" element={<EskulLainnya />} />
           <Route

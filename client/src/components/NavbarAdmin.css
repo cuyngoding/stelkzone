@@ -10,14 +10,13 @@
     height: 70px;
     background-color: #eeeeee;
     border-bottom: 1px solid #b7b7b7;
-    z-index: 10000;
+    z-index: 1000;
 }
 
 .button-menu-admin {
     position: relative;
     right: 550px;
     background-color: #B90303;
-    outline: none;
     height: 40px;
     width: 40px;
     color: white;

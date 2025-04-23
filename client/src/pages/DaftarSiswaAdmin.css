@@ -1,0 +1,237 @@
+.ekskulLainnya-page {
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    margin-left: 55px;
+    flex-wrap: wrap;
+  }
+  
+  .bar-search {
+    width: 70%;
+    max-width: 550px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    background-color: #EEEEEE;
+    box-shadow: inset 0px 10px 12px -8.5px rgba(49, 49, 49, 0.75);
+  }
+  
+  .search-btn {
+    padding: 10px;
+    width: 65px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 0.5px 0px 5px rgba(70, 70, 70, 0.75);
+    transition: 0.3s ease-in-out;
+  }
+  
+  .search-btn:hover {
+    background-color: #dcd9d9;
+    box-shadow: none;
+  }
+  
+  .tambah-data-btn {
+    background-color: #B90303;
+    color: white;
+    width: 45px;
+    height: 45px;
+    font-size: 26px;
+    border: none;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.678);
+    right: 230px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease-in-out;
+    padding: 0;
+  }
+  
+  .tambah-data-siswa-btn:hover {
+    background-color: #990000;
+    color: #dfdfdf;
+  }
+  
+  .eskul-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    /* max-width: 1000px;  */
+    margin: 0 auto; /* Untuk memposisikan di tengah */
+    margin-top: 10px;
+  }
+  
+  .eskul-item {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    width: 90rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 7px 2px rgba(0,0,0,0.1);
+  }
+  
+  .eskul-icon {
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+  
+  .eskul-info {
+    flex-grow: 1;
+  }
+  
+  .eskul-info h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .eskul-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .eskul-members {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .eskul-members span {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .arrow-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 23px;
+    cursor: pointer;
+    color: #000000;
+  }
+
+  .hapus-data-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 21px;
+    margin-right: 30px;
+    cursor: pointer;
+    color: #B90303;
+    padding: 10px;
+    width: 45px;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+  }
+  .hapus-data-btn:hover {
+    background-color: #c1c1c145;
+  }
+
+/* SWEETALERT2 CUSTOM STYLING */
+
+.tambah-data-popup {
+  background: linear-gradient(to bottom, #b70000, #f45c2e);
+  border-radius: 20px;
+  padding: 10px;
+  width: 1000px;
+  /* max-width: 500px; */
+  color: white;
+  overflow: hidden;
+}
+
+.tambah-data-popup label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+  /* margin-bottom: 5px; */
+  color: white;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.tambah-data-popup input.swal2-input {
+  border-radius: 12px;
+  width: 300px;
+  box-sizing: border-box;
+  border: none;
+  margin-bottom: 20px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  font-size: 14px;
+}
+#nama {
+  width: 700px;
+}
+#nis {
+  position: relative;
+  left: 50px;
+}
+#nisn {
+  position: relative;
+  right: 50px;
+}
+#tgl {
+  width: 700px;
+}
+#alamat {
+  width: 700px;
+}
+.confirm-btn {
+  background-color: #d10000;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  width: 500px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.confirm-btn:hover {
+  background-color: #aa0000;
+  transform: scale(1.05);
+}
+
+.profile-icon {
+  display: block;
+  margin: 0 auto 20px;
+  width: 90px;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

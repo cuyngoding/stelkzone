@@ -1,5 +1,5 @@
-import "./ProfilePembina.css";
-import Navbar from "../components/NavbarPembina";
+import "./ProfileAdmin.css";
+import Navbar from "../components/NavbarAdmin";
 import PhotoUser from "../assets/user-profile.png";
 
 function Profile() {
@@ -9,12 +9,12 @@ function Profile() {
         <Navbar />
         <div className="content-container">
           <img className="profile-photo" src={PhotoUser} alt="" />
-          <h1 className="user-name-profile">HARYADI INDRAWIJAYA</h1>
+          <h1 className="user-name-profile-admin">ADMIN STELK</h1>
           <div className="nis-nisn">
             <label className="nip" htmlFor="">
               NIP
             </label>
-            <input className="nip-value" type="number" name="" id="nip" value={544231000} />
+            <input className="nip-value" type="number" name="" id="nip" value={1111111} />
             <label htmlFor="" className="tanggal-lahir-pembina">
               TANGGAL LAHIR
             </label>

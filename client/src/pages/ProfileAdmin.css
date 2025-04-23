@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Geist+Mono:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
 .profile-page {
-    max-width: 100dvw;
+    max-width: 100vw;
 }
 .content-container {
     display: flex;
@@ -17,10 +17,10 @@
     z-index: 100;
 }
 
-.user-name-profile {
+.user-name-profile-admin {
     position: absolute;
     top: 230px;
-    left: 35rem;
+    left: 41.50rem;
     font-size: 30px;
     z-index: 100;
     cursor: default;
@@ -33,14 +33,14 @@
     right: 200px;
 }
 
-.nis{
+.nip{
     font-weight: 700;
     position: relative;
     bottom: 2.800rem;
-    left: 42rem;
+    left: 17rem;
 }
 
- .nis-value {
+ .nip-value {
     padding: 10px;    
     width: 350px;
     font-weight: 600;
@@ -49,39 +49,19 @@
     outline: none;
     border: 2px solid #d1d1d1;
     position: relative;
-    left: 40rem;
+    left: 15rem;
     bottom: 1.200rem;
 }
 
-.nisn {
-    font-weight: 700;
-    position: relative;
-    bottom: 2.900rem;
-    left: 46rem;
-}
-
-.nisn-value {
-    padding: 10px;    
-    width: 350px;
-    font-weight: 600;
-    font-size: medium;
-    border-radius: 5px;
-    outline: none;
-    border: 2px solid #d1d1d1;
-    position: relative;
-    left: 43.500rem;
-    bottom: 1.250rem;
-}
-
-.tanggal-lahir {
+.tanggal-lahir-pembina {
     font-weight: 700;
     width: 130px;
     position: absolute;
     top: 3.500rem;
-    left: 41.850rem;
+    right: 66rem;
 }
 
-.tanggal-lahir-value {
+.tanggal-lahir-value-pembina {
     padding: 10px;    
     width: 500px;
     font-weight: 600; 
@@ -92,14 +72,14 @@
     top: 5rem;
     right: 9rem;
 }
-.alamat {
+.alamat-pembina {
     font-weight: 700; 
     position: absolute;
-    left: 42rem;
+    left: 16rem;
     top: 10rem;
 }
 
-.alamat-value {
+.alamat-value-pembina {
     padding: 10px;    
     width: 500px;
     font-weight: 600; 
@@ -108,32 +88,5 @@
     border: 2px solid #d1d1d1;
     position: relative;
     top: 12rem;
-    right: 41.500rem;
+    right: 42rem;
 }
-
-.edit-data-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #B90303;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    z-index: 999;
-  }
-  
-  .edit-data-btn:hover {
-    background-color: #d30101;
-    transform: scale(1.07);
-  }
-  
-  

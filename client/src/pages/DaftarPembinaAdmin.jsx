@@ -1,28 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import './DaftarSiswaPembina.css';
-import NavbarPembina from "../components/NavbarPembina";
 import PhotoProfile from "../assets/user-profile.png";
+import NavbarAdmin from "../components/NavbarAdmin";
 
-function EskulLainnya() {
+function DaftarPembinaAdmin() {
   const navigate = useNavigate();
 
   const eskuls = [
-    { name: "BACO ANDAYANA BIN BASO", icon: PhotoProfile, route: "profile-siswa" },
-    { name: "ARTHAWAN PRATAMA PAKURIMBA AZZUHUD", icon: PhotoProfile, route: "#" },
-    { name: "ALDRIN FABIO LEIMENA", icon: PhotoProfile, route: "#" },
-    { name: "CHRISTIAN BAGASKARA", icon: PhotoProfile, route: "#" },
-    { name: "MUHAMMAD ALIF AL FATH", icon: PhotoProfile, route: "#" },
-    { name: "MUHAMMAD DZAKI HASYIM", icon: PhotoProfile, route: "#" },
-   
+    // munculkan data siswa di sini
+    { name: "HARYADI INDRAWIJAYA", icon: PhotoProfile, route: "siswa" },
+    { name: "OKTAVIANTO VYAN", icon: PhotoProfile, route: "#" },
+    
   ];
 
   const handleNavigate = (route) => {
-    navigate(`/${route}/pembina`);
+    navigate(`/profile/${route}`);
   };
 
   return (
     <>
-      <NavbarPembina />
+      <NavbarAdmin />
       <div className="ekskulLainnya-page">
         <div className="search-container">
           <input className="bar-search" type="text" placeholder="Search . . ." />
@@ -47,4 +44,4 @@ function EskulLainnya() {
   );
 }
 
-export default EskulLainnya;
+export default DaftarPembinaAdmin;

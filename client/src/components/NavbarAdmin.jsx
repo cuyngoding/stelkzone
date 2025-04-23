@@ -35,7 +35,7 @@ function NavbarAdmin() {
             onClick={toProfile}
           />
           <Link to="/profile/admin" className="user-name-admin">
-            ROSE JOHAR
+            ADMIN STELK
           </Link>
         </div>
         <button className="btn-logout-admin" onClick={handleLogout}>
@@ -60,12 +60,12 @@ function NavbarAdmin() {
             </Link>
           </li>
           <li>
-            <Link to="#">
+            <Link to="/dashboard/admin/daftar-siswa">
               <FaUsers /> Siswa
             </Link>
           </li>
           <li>
-            <Link to="/dashboard/pembina/daftar-siswa">
+            <Link to="/dashboard/admin/daftar-pembina">
               <FaChalkboardTeacher /> Pembina
             </Link>
           </li>

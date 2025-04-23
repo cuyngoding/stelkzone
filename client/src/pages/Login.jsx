@@ -1,5 +1,5 @@
 import "./Login.css";
-import React, { useState, useEffect } from "react";
+import{ useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { login } from "../utils/auth";
@@ -56,6 +56,7 @@ function Login() {
         Swal.fire({
           icon: "success",
           title: "Login Berhasil!",
+          text: `Selamat datang, ${mappedUser.name}!`,
           timer: 2000,
           showConfirmButton: false,
         }).then(() => {
