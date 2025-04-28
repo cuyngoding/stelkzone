@@ -39,15 +39,16 @@ const RedirectByRole = ({ role }) => {
 // Wrapper untuk mengatur scroll & redirect kalau belum login
 const Wrapper = ({ children }) => {
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     document.body.style.overflow =
       location.pathname === "/" ? "hidden" : "auto";
 
-    if (location.pathname !== "/" && !localStorage.getItem("token")) {
-      navigate("/", { replace: true });
-    }
+      if (location.pathname !== "/" && !localStorage.getItem("user")) {
+        navigate("/", { replace: true });
+      }
+      
   }, [location, navigate]);
 
   return children;
@@ -176,6 +177,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/profile-siswa-admin/:id" element={<ProfileSiswaAdmin />} />
+
           {/* Ekskul */}
           <Route path="/more-ekskul" element={<EskulLainnya />} />
           <Route

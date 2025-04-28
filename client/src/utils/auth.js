@@ -1,4 +1,9 @@
-// utils/auth.js
+import axios from "axios";
+
+// Default axios config
+axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common["Accept"] = "application/json";
 
 export const getToken = () => {
   const token = localStorage.getItem("token");
@@ -7,48 +12,52 @@ export const getToken = () => {
 
 export const login = async (email, password) => {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    await axios.get("/sanctum/csrf-cookie");
 
-    const data = await response.json();
-    console.log("DATA LOGIN", data); // Debug hasil response
+    const response = await axios.post("/api/login", { email, password });
 
-    // Ambil token dari response: bisa dari `token` atau `access_token`
-    const token = data.token || data.access_token;
+    const { user, token } = response.data;
 
-    if (token && data.user) {
+    if (user && token) {
+      localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      return { success: true, token, user: data.user };
+      return { success: true, user, token };
     } else {
-      console.error("Token atau user tidak ditemukan dalam response");
-      return { success: false, message: "Login gagal. Cek email/password." };
+      return { success: false, message: "Login gagal. Data tidak lengkap." };
     }
   } catch (err) {
     console.error("Login error:", err);
-    return { success: false, message: err.message };
+    return {
+      success: false,
+      message: err.response?.data?.message || "Terjadi kesalahan",
+    };
   }
 };
 
-// ✅ Logout bisa menerima setRole (opsional) dan redirect
-export const logout = (setRole = null) => {
+export const logout = async (setRole = null) => {
+  try {
+    await axios.post("/api/logout", {}, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+  } catch (err) {
+    console.warn("Logout gagal, tapi token lokal tetap dihapus.");
+  }
+
   localStorage.removeItem("token");
   localStorage.removeItem("user");
 
   if (setRole) setRole(null);
 
-  // Paksa reload atau redirect ke halaman utama
   window.location.href = "/";
   window.location.reload();
 };
 
 export const getUser = () => {
-  const user = localStorage.getItem("user");
   try {
-    return user ? JSON.parse(user) : null;
+    const user = localStorage.getItem("user");
+    return user && user !== "undefined" ? JSON.parse(user) : null;
   } catch {
     return null;
   }

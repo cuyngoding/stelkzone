@@ -1,28 +1,27 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SiswaController;
 
-// Route untuk register dan login (tanpa middleware)
+// Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-// Route yang membutuhkan autentikasi Sanctum
+// Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'user']);
 
-    // ✅ Route khusus untuk masing-masing role
-    Route::middleware('role:admin')->get('/admin', function () {
-        return response()->json(['message' => 'Selamat datang, Admin!']);
+    // Admin routes
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin', fn () => response()->json(['message' => 'Selamat datang, Admin!']));
+        Route::apiResource('/siswas', SiswaController::class);
     });
 
-    Route::middleware('role:siswa')->get('/siswa', function () {
-        return response()->json(['message' => 'Halo, Siswa!']);
-    });
+    // Siswa routes
+    Route::middleware('role:siswa')->get('/siswa', fn () => response()->json(['message' => 'Halo, Siswa!']));
 
-    Route::middleware('role:pembina')->get('/pembina', function () {
-        return response()->json(['message' => 'Hai, Pembina!']);
-    });
+    // Pembina routes
+    Route::middleware('role:pembina')->get('/pembina', fn () => response()->json(['message' => 'Hai, Pembina!']));
 });

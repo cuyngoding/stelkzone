@@ -21,7 +21,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     if (!email || !password) {
       Swal.fire({
         icon: "warning",
@@ -30,29 +30,25 @@ function Login() {
       });
       return;
     }
-
+  
     try {
       const response = await login(email, password);
-
+  
       if (response.success) {
-        const { token, user } = response;
-
-        // Simpan token
+        const { user, token } = response;
+  
+        // Simpan token dan user ke localStorage
         localStorage.setItem("token", token);
-
-        // Ubah role jadi string agar lebih mudah digunakan di App.jsx
         const roleMap = { 1: "siswa", 2: "pembina", 3: "admin" };
         const mappedUser = { ...user, role: roleMap[user.role] || user.role };
-
-        // Simpan user ke localStorage
         localStorage.setItem("user", JSON.stringify(mappedUser));
-
+  
         if (rememberMe) {
           localStorage.setItem("savedEmail", email);
         } else {
           localStorage.removeItem("savedEmail");
         }
-
+  
         Swal.fire({
           icon: "success",
           title: "Login Berhasil!",
@@ -79,6 +75,7 @@ function Login() {
       });
     }
   };
+  
 
   return (
     <div className="login-page">
