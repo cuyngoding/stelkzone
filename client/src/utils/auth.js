@@ -1,59 +1,27 @@
+// src/utils/auth.js
 import axios from "axios";
 
-// Default axios config
-axios.defaults.baseURL = "http://localhost:8000";
-axios.defaults.withCredentials = true;
-axios.defaults.headers.common["Accept"] = "application/json";
+// Buat instance axios lokal dengan baseURL dan interceptor
+const api = axios.create({
+  baseURL: "http://localhost:8000/api",
+});
 
+// Tambahkan token otomatis dari localStorage sebelum setiap request
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Ambil token dari localStorage
 export const getToken = () => {
   const token = localStorage.getItem("token");
   return token && token !== "undefined" ? token : null;
 };
 
-export const login = async (email, password) => {
-  try {
-    await axios.get("/sanctum/csrf-cookie");
-
-    const response = await axios.post("/api/login", { email, password });
-
-    const { user, token } = response.data;
-
-    if (user && token) {
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", token);
-      return { success: true, user, token };
-    } else {
-      return { success: false, message: "Login gagal. Data tidak lengkap." };
-    }
-  } catch (err) {
-    console.error("Login error:", err);
-    return {
-      success: false,
-      message: err.response?.data?.message || "Terjadi kesalahan",
-    };
-  }
-};
-
-export const logout = async (setRole = null) => {
-  try {
-    await axios.post("/api/logout", {}, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
-  } catch (err) {
-    console.warn("Logout gagal, tapi token lokal tetap dihapus.");
-  }
-
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-
-  if (setRole) setRole(null);
-
-  window.location.href = "/";
-  window.location.reload();
-};
-
+// Ambil user dari localStorage
 export const getUser = () => {
   try {
     const user = localStorage.getItem("user");
@@ -61,4 +29,67 @@ export const getUser = () => {
   } catch {
     return null;
   }
+};
+
+// Login (admin/pembina/siswa)
+export const login = async (email, password) => {
+  try {
+    let response;
+    try {
+      // Coba login sebagai siswa
+      response = await api.post("/siswa/login", { email, password });
+    } catch {
+      // Jika gagal, coba login sebagai admin/pembina
+      response = await api.post("/login", { email, password });
+    }
+
+    return handleLoginSuccess(response);
+  } catch (err) {
+    return handleLoginError(err);
+  }
+};
+
+// Logout
+export const logout = async (setRole = null) => {
+  try {
+    await api.post("/logout");
+  } catch (err) {
+    console.warn("Logout error (lanjut hapus token lokal).");
+  }
+
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  delete axios.defaults.headers.common["Authorization"];
+
+  if (setRole) setRole(null);
+  window.location.href = "/";
+};
+
+// Helper: jika login berhasil
+const handleLoginSuccess = (response) => {
+  const { token, user, siswa } = response.data;
+  const identity = user || siswa;
+
+  // Jika role tidak ada dari backend, beri default
+  if (!identity.role) {
+    identity.role = user ? "admin" : "siswa";
+  }
+
+  if (token) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(identity));
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    return { success: true, user: identity };
+  } else {
+    return { success: false, message: "Token tidak ditemukan." };
+  }
+};
+
+// Helper: jika login gagal
+const handleLoginError = (err) => {
+  console.error("Login error:", err);
+  return {
+    success: false,
+    message: err.response?.data?.message || "Login gagal",
+  };
 };

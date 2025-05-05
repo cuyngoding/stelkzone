@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
 {
@@ -16,19 +18,42 @@ class SiswaController extends Controller
     // POST /api/siswa
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'nama' => 'required|string|max:255',
-            'nis' => 'required|numeric|unique:siswas',
-            'nisn' => 'required|numeric|unique:siswas',
-            'tanggal_lahir' => 'required|date',
+            'nis' => 'required|string|max:20|unique:siswas,nis',
+            'nisn' => 'required|string|max:20|unique:siswas,nisn',
+            'tanggal_lahir' => 'nullable|date',
             'alamat' => 'required|string',
         ]);
+    
+        // Generate email dan hash password berdasarkan NIS
+        $email = $request->nis . '@gmail.com';
+        $password = Hash::make($request->nis);
+    
+        // Simpan semua ke tabel siswas
+        $siswa = Siswa::create([
+            'nama' => $request->nama,
+            'nis' => $request->nis,
+            'nisn' => $request->nisn,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'alamat' => $request->alamat,
+            'email' => $email,
+            'password' => $password,
+        ]);
 
-        // Ambil user_id dari token (auth:sanctum)
-        $validated['user_id'] = $request->user()->id;
+        return response()->json([
+            'message' => 'Siswa berhasil ditambahkan.',
+            'siswa' => [
+                'id' => $siswa->id,
+                'nama' => $siswa->nama,
+                'nis' => $siswa->nis,
+                'nisn' => $siswa->nisn,
+                'email' => $siswa->email,
+                'alamat' => $siswa->alamat,
+                'tanggal_lahir' => $siswa->tanggal_lahir,
+            ]
+        ], 201);
 
-        $siswa = Siswa::create($validated);
-        return response()->json($siswa, 201);
     }
 
     // GET /api/siswa/{id}
@@ -56,6 +81,7 @@ class SiswaController extends Controller
             'nama' => 'sometimes|required|string|max:255',
             'nis' => 'sometimes|required|numeric|unique:siswas,nis,' . $id,
             'nisn' => 'sometimes|required|numeric|unique:siswas,nisn,' . $id,
+            'email' => 'sometimes|required|email|unique:siswas,email,' . $id,
             'tanggal_lahir' => 'sometimes|required|date',
             'alamat' => 'sometimes|required|string',
         ]);

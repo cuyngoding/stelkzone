@@ -1,3 +1,7 @@
+import { checkAuth } from "../utils/api";
+import { getToken } from "../utils/auth";
+import { useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 import NavbarAdmin from "../components/NavbarAdmin";
 import SatryaRover from "../assets/satrya-rover.png";
@@ -12,6 +16,18 @@ import Cyberdef from "../assets/cyberdef.png";
 
 function HomeAdmin() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      const result = await checkAuth();
+      console.log("✅ checkAuth result:", result);
+      if (!result.success) {
+        navigate("/");
+      }
+    };
+
+    verifyUser();
+  }, [navigate]);
 
   const ekskulList = [
     {

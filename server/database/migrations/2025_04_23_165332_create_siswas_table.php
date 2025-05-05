@@ -10,14 +10,18 @@ return new class extends Migration
 {
     Schema::create('siswas', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
         $table->string('nama');
         $table->string('nis')->unique();
-        $table->string('nisn')->unique();
-        $table->date('tanggal_lahir');
-        $table->text('alamat');
+        $table->string('nisn')->nullable()->unique();
+        $table->date('tanggal_lahir')->nullable();
+        $table->string('email')->unique();
+        $table->string('alamat')->nullable();
+        $table->string('password');
+        $table->string('role')->default('siswa');
+        $table->rememberToken();
         $table->timestamps();
-    });    
+    });
+    
 }
 
     /**

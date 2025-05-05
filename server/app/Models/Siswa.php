@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens; // jika pakai Sanctum
+use Illuminate\Notifications\Notifiable;
 
-class Siswa extends Model
+class Siswa extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, Notifiable;
 
     protected $fillable = [
         'nama',
@@ -15,10 +16,13 @@ class Siswa extends Model
         'nisn',
         'tanggal_lahir',
         'alamat',
-        'user_id',
+        'email',
+        'password',
+        'role',
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }
