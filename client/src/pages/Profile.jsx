@@ -14,7 +14,7 @@ function Profile() {
             <label className="nis" htmlFor="">
               NIS
             </label>
-            <input className="nis-value" type="number" name="" id="nis" value={544231000} />
+            <input className="nis-value" type="number" name=""  value={544231000} />
             <label className="nisn" htmlFor="">
               NISN
             </label>

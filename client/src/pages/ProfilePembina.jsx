@@ -14,7 +14,7 @@ function Profile() {
             <label className="nip" htmlFor="">
               NIP
             </label>
-            <input className="nip-value" type="number" name="" id="nip" value={544231000} />
+            <input className="nip-value" type="number" name=""  value={544231000} />
             <label htmlFor="" className="tanggal-lahir-pembina">
               TANGGAL LAHIR
             </label>

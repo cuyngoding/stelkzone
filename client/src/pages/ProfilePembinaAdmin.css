@@ -40,7 +40,7 @@
     left: 17rem;
 }
 
- .nip-value {
+ .nip-value-pembinaadmin {
     padding: 10px;    
     width: 350px;
     font-weight: 600;
@@ -49,7 +49,7 @@
     outline: none;
     border: 2px solid #d1d1d1;
     position: relative;
-    left: 40rem;
+    left: 15rem;
     bottom: 1.200rem;
 }
 

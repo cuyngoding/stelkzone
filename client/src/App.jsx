@@ -26,6 +26,7 @@ import ProfileAdmin from "./pages/ProfileAdmin";
 import ProfileSiswaPembina from "./pages/ProfileSiswaPembina";
 import ProfileSiswaAdmin from "./pages/ProfileSiswaAdmin";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProfilePembinaAdmin from "./pages/ProfilePembinaAdmin";
 import "./App.css";
 
 // Redirect otomatis berdasarkan role
@@ -39,16 +40,15 @@ const RedirectByRole = ({ role }) => {
 // Wrapper untuk mengatur scroll & redirect kalau belum login
 const Wrapper = ({ children }) => {
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.overflow =
       location.pathname === "/" ? "hidden" : "auto";
 
-      if (location.pathname !== "/" && !localStorage.getItem("user")) {
-        navigate("/", { replace: true });
-      }
-      
+    if (location.pathname !== "/" && !localStorage.getItem("user")) {
+      navigate("/", { replace: true });
+    }
   }, [location, navigate]);
 
   return children;
@@ -177,7 +177,10 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/profile-siswa-admin/:id" element={<ProfileSiswaAdmin />} />
+          <Route
+            path="/profile-siswa-admin/:id"
+            element={<ProfileSiswaAdmin />}
+          />
 
           {/* Ekskul */}
           <Route path="/more-ekskul" element={<EskulLainnya />} />
@@ -197,9 +200,23 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/more-ekskul/daftar/satryarover"
-            element={<SatrovDaftar />}
+            element={
+              <ProtectedRoute allowedRoles={["siswa"]}>
+                <SatrovDaftar />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/profile-pembina/admin"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <ProfilePembinaAdmin />
+              </ProtectedRoute>
+            }
           />
 
           {/* Not Found */}

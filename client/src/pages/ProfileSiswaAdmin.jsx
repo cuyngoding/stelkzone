@@ -121,7 +121,7 @@ function ProfileSiswaAdmin() {
           <h1 className="user-name-profile">{siswa.nama}</h1>
           <div className="nis-nisn">
             <label className="nis" htmlFor="">NIS</label>
-            <input className="nis-value-profilesiswaadmin" type="number" id="nis" value={siswa.nis || ''} readOnly />
+            <input className="nis-value-profilesiswaadmin" type="number" value={siswa.nis || ''} readOnly />
             <label className="nisn" htmlFor="">NISN</label>
             <input className="nisn-value" type="number" id="nisn" value={siswa.nisn || ''} readOnly />
             <label htmlFor="" className="tanggal-lahir">TANGGAL LAHIR</label>

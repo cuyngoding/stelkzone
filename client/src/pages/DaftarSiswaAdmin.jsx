@@ -104,7 +104,11 @@ function DaftarSiswaAdmin() {
       `,
       confirmButtonText: 'Confirm',
       showCloseButton: true,
-      focusConfirm: false,
+      customClass: {
+        popup: 'tambah-data-popup',
+        confirmButton: 'confirm-btn',
+      },
+      buttonsStyling: false,
       preConfirm: () => ({
         nama: document.getElementById("nama").value,
         nis: document.getElementById("nis").value,

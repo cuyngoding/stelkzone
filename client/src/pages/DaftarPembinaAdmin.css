@@ -177,17 +177,12 @@
 #nama {
   width: 700px;
 }
-#nis {
-  position: relative;
-  left: 50px;
+#nip {
+  width: 700px;
 }
 .nis-value-profilesiswaadmin {
   position: relative;
   left: 640px;
-}
-#nisn {
-  position: relative;
-  right: 50px;
 }
 #tgl {
   width: 700px;
