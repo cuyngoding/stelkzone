@@ -16,6 +16,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => true, // ini penting untuk Sanctum + cookies
+    'supports_credentials' => false, // ini penting untuk Sanctum + cookies
 
 ];

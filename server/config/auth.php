@@ -16,6 +16,11 @@ return [
             'driver' => 'sanctum',
             'provider' => 'siswas',
         ],
+        'pembina' => [
+        'driver' => 'sanctum',
+        'provider' => 'pembinas',
+    ],
+
     ],
 
     'providers' => [
@@ -27,6 +32,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Siswa::class,
         ],
+        'pembinas' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Pembina::class,
+    ],
+
     ],
 
     'passwords' => [

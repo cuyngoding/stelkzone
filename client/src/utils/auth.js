@@ -36,11 +36,16 @@ export const login = async (email, password) => {
   try {
     let response;
     try {
-      // Coba login sebagai siswa
+      // 1. Coba login sebagai siswa
       response = await api.post("/siswa/login", { email, password });
     } catch {
-      // Jika gagal, coba login sebagai admin/pembina
-      response = await api.post("/login", { email, password });
+      try {
+        // 2. Jika gagal, coba login sebagai pembina
+        response = await api.post("/pembina/login", { email, password });
+      } catch {
+        // 3. Jika gagal, coba login sebagai admin
+        response = await api.post("/login", { email, password });
+      }
     }
 
     return handleLoginSuccess(response);
@@ -48,6 +53,7 @@ export const login = async (email, password) => {
     return handleLoginError(err);
   }
 };
+
 
 // Logout
 export const logout = async (setRole = null) => {
@@ -67,12 +73,13 @@ export const logout = async (setRole = null) => {
 
 // Helper: jika login berhasil
 const handleLoginSuccess = (response) => {
-  const { token, user, siswa } = response.data;
-  const identity = user || siswa;
+  const { token, user, siswa, pembina } = response.data;
+  const identity = user || siswa || pembina;
 
-  // Jika role tidak ada dari backend, beri default
   if (!identity.role) {
-    identity.role = user ? "admin" : "siswa";
+    if (user) identity.role = "admin";
+    else if (siswa) identity.role = "siswa";
+    else if (pembina) identity.role = "pembina";
   }
 
   if (token) {
@@ -84,6 +91,7 @@ const handleLoginSuccess = (response) => {
     return { success: false, message: "Token tidak ditemukan." };
   }
 };
+
 
 // Helper: jika login gagal
 const handleLoginError = (err) => {

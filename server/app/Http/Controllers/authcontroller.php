@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Siswa;
+use App\Models\Pembina;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller 
@@ -17,7 +17,7 @@ class AuthController extends Controller
             'nama' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            'role' => 'in:admin,pembina'
+            'role' => 'in:admin'
         ]);
     
         $user = User::create([
@@ -69,7 +69,7 @@ class AuthController extends Controller
     
         return response()->json([
             'id' => $user->id,
-            'nama' => $user->nama, // ← perbaikan di sini
+            'nama' => $user->nama,
             'email' => $user->email,
             'role' => $user->role
         ]);
@@ -117,11 +117,40 @@ class AuthController extends Controller
     
         return response()->json([
             'token' => $token,
-            'siswa' => [
+            'user' => [
                 'id' => $siswa->id,
                 'nama' => $siswa->nama,
                 'email' => $siswa->email,
+                'role' => 'siswa',
             ],
         ]);
-    }    
+    }
+    
+    public function loginPembina(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        $pembina = Pembina::where('email', $request->email)->first();
+    
+        if (!$pembina || !Hash::check($request->password, $pembina->password)) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+    
+        $token = $pembina->createToken('pembinaToken')->plainTextToken;
+    
+        return response()->json([
+            'token' => $token,
+            'user' => [
+                'id' => $pembina->id,
+                'nama' => $pembina->nama,
+                'email' => $pembina->email,
+                'nip' => $pembina->nip,
+                'role' => 'pembina',
+            ],
+        ]);
+    }
+    
 }

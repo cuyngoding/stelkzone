@@ -211,14 +211,13 @@ function App() {
           />
 
           <Route
-            path="/profile-pembina/admin"
+            path="/profile-pembina/admin/:id"
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
                 <ProfilePembinaAdmin />
               </ProtectedRoute>
             }
           />
-
           {/* Not Found */}
           <Route path="*" element={<NotFound />} />
         </Routes>
