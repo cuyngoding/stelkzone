@@ -1,8 +1,45 @@
 import Navbar from "../components/NavbarPembina"
 import SatryaRover from "../assets/satrya-rover.png";
+import { BiSolidPencil } from "react-icons/bi";
+import { FaTrash } from "react-icons/fa";
+import { MdOutlineAdd } from "react-icons/md";
+import Swal from "sweetalert2";
 import './Satrov.css'
 
 function Satrov() {
+  const handleTambahData = () => {
+    Swal.fire({
+      title: 'Edit Data Anggota',
+      html: `
+        <div class="form-container">
+          <label for="nama">PILIH SISWA</label>
+          <select id="nama" class="swal2-input">
+          <option value="">Pilih Siswa</option>
+          <option value="BACO ANDAYANA BIN BASO">BACO ANDAYANA BIN BASO</option>
+          <option value="LINDY SAFIRA">LINDY SAFIRA</option>
+          </select>
+          <label for="jabatan">JABATAN</label>
+          <select id="jabatan" class="swal2-input">
+          <option value="">Pilih Jabatan</option>
+          <option value="Anggota">Anggota</option>
+          <option value="Ketua">Ketua putra</option>
+          <option value="Wakil Ketua">Ketua putri</option>
+          </select>
+        </div>`,
+        confirmButtonText: 'Confirm',
+        showCloseButton: true,
+        customClass: {
+          popup: 'tambah-data-popup',
+          confirmButton: 'confirm-btn',
+          title: 'edit-data-title',
+        },
+      preConfirm: () => {
+        const nama = document.getElementById('nama').value;
+        const nis = document.getElementById('nis').value;
+        // Simpan data ke server atau lakukan aksi lain di sini
+      }
+    });
+  };
   return (
     <>
     <div className="satrov-page">
@@ -20,7 +57,40 @@ function Satrov() {
       <input className="value-satrov" type="text" name="" id="" value=" Arthawan Pratama Pakurimba Azzuhud" />
       <label className="ketua-pi ketua" htmlFor="">Ketua Putri</label>
       <input className="value-satrov" type="text" name="" id="" value=" Siti Khadija Sukardi" />
-      </div>
+      <h1 className="header-daftar-anggota">Anggota</h1>
+      <table className="table-anggota">
+        <thead>
+          <tr className="table-header">
+            <th className="table-header-item">Nama</th>
+            <th className="table-header-item">NIS</th>
+            <th className="table-header-item">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="table-row">
+            <td className="table-row-item">BACO ANDAYANA BIN BASO</td>
+            <td className="table-row-item">544231000</td>
+            <td className="table-row-item action">
+              <button className="btn-edit"><BiSolidPencil/></button>
+              <button className="btn-delete"><FaTrash/></button>
+            </td>
+
+          </tr>
+          <tr className="table-row">
+            <td className="table-row-item">LINDY SAFIRA</td>
+            <td className="table-row-item">544231001</td>
+            <td className="table-row-item action">
+              <button className="btn-edit"><BiSolidPencil/></button>
+              <button className="btn-delete"><FaTrash/></button>  
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button className="edit-data-btn" onClick={handleTambahData}>
+          <MdOutlineAdd className="addicon" />
+      </button>
+    </div>
+
     </div>
     </>
   )

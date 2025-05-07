@@ -20,7 +20,27 @@ function Satrov() {
       <input className="value-satrov" type="text" name="" id="" value=" Arthawan Pratama Pakurimba Azzuhud" />
       <label className="ketua-pi ketua" htmlFor="">Ketua Putri</label>
       <input className="value-satrov" type="text" name="" id="" value=" Siti Khadija Sukardi" />
-      </div>
+      <h1 className="header-daftar-anggota">Anggota</h1>
+      <table className="table-anggota">
+        <thead>
+          <tr className="table-header">
+            <th className="table-header-item">Nama</th>
+            <th className="table-header-item">NIS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="table-row">
+            <td className="table-row-item">BACO ANDAYANA BIN BASO</td>
+            <td className="table-row-item">544231000</td>
+          </tr>
+          <tr className="table-row">
+            <td className="table-row-item">LINDY SAFIRA</td>
+            <td className="table-row-item">544231001</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     </div>
     </>
   )

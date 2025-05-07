@@ -1,5 +1,5 @@
 .satrov-page {
-    max-height: 100vh;
+    height: 180vh;
 }
 
 .logo-eskul {
@@ -60,3 +60,96 @@ font-size: 2rem;
 .ketua {
     font-weight: 700;
 }
+
+.header-daftar-anggota {
+    position: relative;
+    top: 5rem;
+    right: 40rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-bottom: 3px solid #000;
+    padding-bottom: 4px;
+    width: 35vw;
+  }
+  
+  .table-anggota {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 2rem;
+    position: relative;
+    top: 6rem;
+    right: 40rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 22px;
+    overflow: hidden;
+  }
+  
+  .table-anggota th,
+  .table-anggota td {
+    padding: 23px 110px 23px 137px ;
+    text-align: left;
+    white-space: nowrap;       /* >>> cegah turun baris */
+    overflow: hidden;
+    text-overflow: ellipsis;   /* >>> kasih titik-titik kalau kepanjangan */
+    vertical-align: middle;
+  }
+  
+  .table-anggota th {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: center;
+    /* border-bottom: #000 solid 3px; */
+    background-color: #eeeeee;
+    border-bottom: 2px solid #b7b7b7;
+    color: #000000;
+  }
+  
+  .table-anggota td {
+    font-size: 1rem;
+  }
+  
+  /* Atur lebar kolom agar cukup */
+  .table-anggota td:nth-child(1),
+  .table-anggota th:nth-child(1) {
+    width: 1000%;
+  }
+  
+  .table-anggota td:nth-child(2),
+  .table-anggota th:nth-child(2) {
+    width: 100%;
+  }
+
+  .table-anggota td:nth-child(3),
+  .table-anggota th:nth-child(3) {
+    width: 100%;
+  }
+  
+  .action {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .btn-edit,
+  .btn-delete {
+    font-size: 1.1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .btn-edit:hover {
+    color: #007bff;
+    transform: scale(1.2);
+  }
+  
+  .btn-delete:hover {
+    color: #dc3545;
+    transform: scale(1.2);
+  }
+  
+  .addicon {
+    font-size: 2rem;
+  }
