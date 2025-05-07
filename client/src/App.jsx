@@ -7,13 +7,13 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import ProfilePembina from "./pages/ProfilePembina";
 import ProfileSatrov from "./pages/Satrov";
 import ProfileSatrovPembina from "./pages/SatrovPembina";
+import ProfileSatrovAdmin from "./pages/SatrovAdmin";
 import NotFound from "./pages/NotFound";
 import EskulLainnya from "./pages/EskulLainnya";
 import SatrovDaftar from "./pages/SatrovDaftar";
@@ -197,6 +197,15 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={["pembina"]}>
                 <ProfileSatrovPembina />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard/admin/profile-eskul/satryarover"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <ProfileSatrovAdmin />
               </ProtectedRoute>
             }
           />
