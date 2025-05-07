@@ -42,23 +42,36 @@ function ProfilePembinaAdmin() {
 
   const handleEditData = async () => {
     const result = await MySwal.fire({
-      title: 'Edit Data Pembina',
+      title: "Edit Data Pembina",
       html: `
         <div class="form-container">
           <img src="${PhotoUser}" alt="profile" class="profile-icon"/>
           <label for="nama">NAMA</label>
-          <input id="nama" type="text" class="swal2-input" value="${pembina.nama}" />
+          <input id="nama" type="text" class="swal2-input" value="${
+            pembina.nama
+          }" />
           <label for="nip">NIP</label>
-          <input id="nip" type="text" class="swal2-input" value="${pembina.nip || ''}" />
+          <input id="nip" type="text" class="swal2-input" value="${
+            pembina.nip || ""
+          }" />
           <label for="tgl">TANGGAL LAHIR</label>
-          <input id="tgl" type="date" class="swal2-input" value="${pembina.tanggal_lahir || ''}" />
+          <input id="tgl" type="date" class="swal2-input" value="${
+            pembina.tanggal_lahir || ""
+          }" />
           <label for="alamat">ALAMAT</label>
-          <input id="alamat" type="text" class="swal2-input" value="${pembina.alamat || ''}" />
+          <input id="alamat" type="text" class="swal2-input" value="${
+            pembina.alamat || ""
+          }" />
         </div>
       `,
       confirmButtonText: "Simpan",
-      showCancelButton: true,
+      showCloseButton: true,
       focusConfirm: false,
+      customClass: {
+        popup: "tambah-data-popup",
+        confirmButton: "confirm-btn",
+        title: "edit-data-title",
+      },
       preConfirm: () => {
         return {
           nama: document.getElementById("nama").value,
@@ -72,12 +85,16 @@ function ProfilePembinaAdmin() {
     if (result.isConfirmed) {
       try {
         const token = getToken();
-        await axios.put(`http://localhost:8000/api/pembinas/${id}`, result.value, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        await axios.put(
+          `http://localhost:8000/api/pembinas/${id}`,
+          result.value,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         await fetchPembina();
         Swal.fire("Berhasil", "Data pembina diperbarui", "success");
       } catch (err) {
@@ -97,11 +114,26 @@ function ProfilePembinaAdmin() {
         <h1 className="user-name-profile">{pembina.nama}</h1>
         <div className="nis-nisn">
           <label className="nip">NIP</label>
-          <input className="nip-value-pembinaadmin" type="text" value={pembina.nip || ""} readOnly />
+          <input
+            className="nip-value-pembinaadmin"
+            type="text"
+            value={pembina.nip || ""}
+            readOnly
+          />
           <label className="tanggal-lahir-pembina">TANGGAL LAHIR</label>
-          <input className="tanggal-lahir-value-pembina" type="date" value={pembina.tanggal_lahir || ""} readOnly />
+          <input
+            className="tanggal-lahir-value-pembina"
+            type="date"
+            value={pembina.tanggal_lahir || ""}
+            readOnly
+          />
           <label className="alamat-pembina">ALAMAT</label>
-          <input className="alamat-value-pembina" type="text" value={pembina.alamat || ""} readOnly />
+          <input
+            className="alamat-value-pembina"
+            type="text"
+            value={pembina.alamat || ""}
+            readOnly
+          />
         </div>
         <button className="edit-data-btn" onClick={handleEditData}>
           <BiSolidPencil />

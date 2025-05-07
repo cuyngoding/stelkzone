@@ -146,11 +146,11 @@
 /* SWEETALERT2 CUSTOM STYLING */
 
 .tambah-data-popup {
-  background: linear-gradient(to bottom, #b70000, #f45c2e);
+  background-color: rgb(250, 249, 249);
   border-radius: 20px;
   padding: 10px;
   width: 1000px;
-  color: white;
+  color: rgb(0, 0, 0);
   overflow: hidden;
 }
 
@@ -158,7 +158,7 @@
   font-weight: bold;
   display: block;
   margin-top: 10px;
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 14px;
   text-transform: uppercase;
 }
@@ -170,6 +170,7 @@
   border: none;
   margin-bottom: 20px;
   background-color: white;
+  border: 2px solid #d1d1d1;
   color: black;
   padding: 10px;
   font-size: 14px;

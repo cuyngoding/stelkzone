@@ -76,6 +76,7 @@ function ProfileSiswaAdmin() {
       customClass: {
         popup: 'tambah-data-popup',
         confirmButton: 'confirm-btn',
+        title: 'edit-data-title',
       },
       buttonsStyling: false,
       preConfirm: () => ({
