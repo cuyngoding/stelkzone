@@ -22,8 +22,8 @@ function Satrov() {
           <select id="jabatan" class="swal2-input">
           <option value="">Pilih Jabatan</option>
           <option value="Anggota">Anggota</option>
-          <option value="Ketua">Ketua putra</option>
-          <option value="Wakil Ketua">Ketua putri</option>
+          <option value="Ketua Putra">Ketua putra</option>
+          <option value="Ketua Putri">Ketua putri</option>
           </select>
         </div>`,
         confirmButtonText: 'Confirm',
