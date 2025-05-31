@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import './DaftarSiswaAdmin.css';
+import "./DaftarSiswaAdmin.css";
 import PhotoProfile from "../assets/user-profile.png";
 import NavbarAdmin from "../components/NavbarAdmin";
 import { IoMdAdd } from "react-icons/io";
 import { FaRegTrashAlt } from "react-icons/fa";
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { useState, useEffect } from "react";
+import BackButton from "../components/ButtonBack";
 import axios from "axios";
 import { getToken } from "../utils/auth";
 
@@ -49,7 +50,6 @@ function DaftarSiswaAdmin() {
   const handleNavigate = (id) => {
     navigate(`/profile-siswa-admin/${id}`);
   };
-  
 
   const handleHapusSiswa = async (id) => {
     const konfirmasi = await MySwal.fire({
@@ -58,7 +58,7 @@ function DaftarSiswaAdmin() {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Ya, hapus!",
-      cancelButtonText: "Batal"
+      cancelButtonText: "Batal",
     });
 
     if (konfirmasi.isConfirmed) {
@@ -102,11 +102,11 @@ function DaftarSiswaAdmin() {
           <input id="alamat" type="text" class="swal2-input" />
         </div>
       `,
-      confirmButtonText: 'Confirm',
+      confirmButtonText: "Confirm",
       showCloseButton: true,
       customClass: {
-        popup: 'tambah-data-popup',
-        confirmButton: 'confirm-btn',
+        popup: "tambah-data-popup",
+        confirmButton: "confirm-btn",
       },
       buttonsStyling: false,
       preConfirm: () => ({
@@ -115,7 +115,7 @@ function DaftarSiswaAdmin() {
         nisn: document.getElementById("nisn").value,
         tanggal_lahir: document.getElementById("tgl").value,
         alamat: document.getElementById("alamat").value,
-      })
+      }),
     });
 
     if (result.isConfirmed) {
@@ -141,38 +141,50 @@ function DaftarSiswaAdmin() {
       <NavbarAdmin />
       <div className="ekskulLainnya-page">
         <div className="search-container">
-          <input className="bar-search" type="text" placeholder="Search . . ." />
-          <button className="search-btn" type="search">GO</button>
+          <input
+            className="bar-search"
+            type="text"
+            placeholder="Search . . ."
+          />
+          <button className="search-btn" type="search">
+            GO
+          </button>
           <button className="tambah-data-btn" onClick={handleTambahData}>
             <IoMdAdd />
           </button>
         </div>
 
         <div className="eskul-list">
-  {siswaList.length > 0 ? (
-    siswaList.map((siswa, index) => (
-      <div key={index} className="eskul-item">
-        <img src={siswa.icon} alt={siswa.name} className="eskul-icon" />
-        <div className="eskul-info">
-          <h2>{siswa.name}</h2>
+          {siswaList.length > 0 ? (
+            siswaList.map((siswa, index) => (
+              <div key={index} className="eskul-item">
+                <img src={siswa.icon} alt={siswa.name} className="eskul-icon" />
+                <div className="eskul-info">
+                  <h2>{siswa.name}</h2>
+                </div>
+                <div className="eskul-members">
+                  <button
+                    className="hapus-data-btn"
+                    onClick={() => handleHapusSiswa(siswa.id)}
+                  >
+                    <FaRegTrashAlt />
+                  </button>
+                  <button
+                    className="arrow-btn"
+                    onClick={() => handleNavigate(siswa.id)}
+                  >
+                    →
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="empty-state">
+              <p>Belum ada siswa.</p>
+            </div>
+          )}
         </div>
-        <div className="eskul-members">
-          <button className="hapus-data-btn" onClick={() => handleHapusSiswa(siswa.id)}>
-            <FaRegTrashAlt />
-          </button>
-          <button className="arrow-btn" onClick={() => handleNavigate(siswa.id)}>
-
-            →
-          </button>
-        </div>
-      </div>
-    ))
-  ) : (
-    <div className="empty-state">
-      <p>Belum ada siswa.</p>
-    </div>
-  )}
-</div>
+        <BackButton />
       </div>
     </>
   );

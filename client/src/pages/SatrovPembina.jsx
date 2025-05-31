@@ -3,6 +3,7 @@ import SatryaRover from "../assets/satrya-rover.png";
 import { BiSolidPencil } from "react-icons/bi";
 import { FaTrash } from "react-icons/fa";
 import { MdOutlineAdd } from "react-icons/md";
+import BackButton from "../components/ButtonBack";
 import Swal from "sweetalert2";
 import './Satrov.css'
 
@@ -90,7 +91,7 @@ function Satrov() {
           <MdOutlineAdd className="addicon" />
       </button>
     </div>
-
+    <BackButton />
     </div>
     </>
   )

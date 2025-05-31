@@ -1,6 +1,7 @@
 import "./ProfileAdmin.css";
 import Navbar from "../components/NavbarAdmin";
 import PhotoUser from "../assets/user-profile.png";
+import BackButton from "../components/ButtonBack"
 
 function Profile() {
   return (
@@ -24,6 +25,7 @@ function Profile() {
             </label>
             <input type="text" name="" id="" className="alamat-value-pembina" value="-" />
           </div>
+          <BackButton/>
         </div>
       </div>
     </>

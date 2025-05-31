@@ -11,13 +11,7 @@ function HomePembina() {
     navigate("/dashboard/pembina/profile-eskul/satryarover");
   };
 
-  const handleLogout = () => {
-    // Menghapus token dan user dari localStorage
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    // Navigasi ke halaman login
-    navigate("/");
-  };
+ 
 
   return (
     <div className="home-page">

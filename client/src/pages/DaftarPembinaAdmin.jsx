@@ -5,6 +5,7 @@ import NavbarAdmin from "../components/NavbarAdmin";
 import { IoMdAdd } from "react-icons/io";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2';
+import BackButton from "../components/ButtonBack";
 import withReactContent from 'sweetalert2-react-content';
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -162,6 +163,7 @@ function DaftarPembinaAdmin() {
             </div>
           )}
         </div>
+        <BackButton />
       </div>
     </>
   );

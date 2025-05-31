@@ -1,6 +1,7 @@
 import "./Profile.css";
 import Navbar from "../components/Navbar";
 import PhotoUser from "../assets/user-profile.png";
+import BackButton from "../components/ButtonBack";
 
 function Profile() {
   return (
@@ -29,6 +30,7 @@ function Profile() {
             <input type="text" name="" id="" className="alamat-value" value="Jl. Serigala No.19" />
           </div>
         </div>
+        <BackButton />
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar"
 import SatryaRover from "../assets/satrya-rover.png";
+import BackButton from "../components/ButtonBack";
 import './Satrov.css'
 
 function Satrov() {
@@ -40,7 +41,7 @@ function Satrov() {
         </tbody>
       </table>
     </div>
-
+    <BackButton />
     </div>
     </>
   )

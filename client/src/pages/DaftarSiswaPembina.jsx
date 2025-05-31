@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import './DaftarSiswaPembina.css';
 import NavbarPembina from "../components/NavbarPembina";
 import PhotoProfile from "../assets/user-profile.png";
+import BackButton from "../components/ButtonBack";
 
 function EskulLainnya() {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ function EskulLainnya() {
             </div>
           ))}
         </div>
+        <BackButton />
       </div>
     </>
   );

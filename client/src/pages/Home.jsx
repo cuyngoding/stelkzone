@@ -4,7 +4,6 @@ import "./Home.css";
 import Navbar from "../components/Navbar";
 import { checkAuth } from "../utils/api";
 import { getToken } from "../utils/auth";
-
 import SatryaRover from "../assets/satrya-rover.png";
 import WebTech from "../assets/web-tech.png";
 import Capture from "../assets/capture.png";

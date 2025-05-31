@@ -7,6 +7,7 @@ import Capture from "../assets/capture.png";
 import Gradasi from "../assets/gradasi.png";
 import Pastelk from "../assets/pastelk.png";
 import Elips from "../assets/elips.png";
+import BackButton from "../components/ButtonBack";
 import Ikramtel from "../assets/ikramtel.png";
 import Komers from "../assets/komers.png";
 
@@ -52,6 +53,7 @@ function EskulLainnya() {
             </div>
           ))}
         </div>
+        <BackButton />
       </div>
     </>
   );
