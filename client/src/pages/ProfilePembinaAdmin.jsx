@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./ProfilePembinaAdmin.css";
+import "./ProfilePembina.css";
 import Navbar from "../components/NavbarAdmin";
 import PhotoUser from "../assets/user-profile.png";
 import { BiSolidPencil } from "react-icons/bi";

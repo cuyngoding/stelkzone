@@ -66,6 +66,7 @@ function Satrov() {
           <tr className="table-header">
             <th className="table-header-item">Nama</th>
             <th className="table-header-item">NIS</th>
+            <th className="table-header-item">KELAS</th>
             <th className="table-header-item">Aksi</th>
           </tr>
         </thead>
@@ -73,6 +74,7 @@ function Satrov() {
           <tr className="table-row">
             <td className="table-row-item">BACO ANDAYANA BIN BASO</td>
             <td className="table-row-item">544231000</td>
+            <td className="table-row-item">XI RPL 1</td>
             <td className="table-row-item action">
               <button className="btn-edit"><BiSolidPencil/></button>
               <button className="btn-delete"><FaTrash/></button>
@@ -82,6 +84,7 @@ function Satrov() {
           <tr className="table-row">
             <td className="table-row-item">LINDY SAFIRA</td>
             <td className="table-row-item">544231001</td>
+            <td className="table-row-item">XI RPL 4</td>
             <td className="table-row-item action">
               <button className="btn-edit"><BiSolidPencil/></button>
               <button className="btn-delete"><FaTrash/></button>  

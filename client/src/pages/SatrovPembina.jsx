@@ -2,15 +2,15 @@ import Navbar from "../components/NavbarPembina"
 import SatryaRover from "../assets/satrya-rover.png";
 import { BiSolidPencil } from "react-icons/bi";
 import { FaTrash } from "react-icons/fa";
-import { MdOutlineAdd } from "react-icons/md";
 import BackButton from "../components/ButtonBack";
+import { IoPeople } from "react-icons/io5";
 import Swal from "sweetalert2";
 import './Satrov.css'
 
 function Satrov() {
   const handleTambahData = () => {
     Swal.fire({
-      title: 'Edit Data Anggota',
+      title: 'Persetujuan Pembina',
       html: `
         <div class="form-container">
           <label for="nama">PILIH SISWA</label>
@@ -64,6 +64,7 @@ function Satrov() {
           <tr className="table-header">
             <th className="table-header-item">Nama</th>
             <th className="table-header-item">NIS</th>
+            <th className="table-header-item">KELAS</th>
             <th className="table-header-item">Aksi</th>
           </tr>
         </thead>
@@ -71,6 +72,7 @@ function Satrov() {
           <tr className="table-row">
             <td className="table-row-item">BACO ANDAYANA BIN BASO</td>
             <td className="table-row-item">544231000</td>
+            <td className="table-row-item">XI RPL 1</td>
             <td className="table-row-item action">
               <button className="btn-edit"><BiSolidPencil/></button>
               <button className="btn-delete"><FaTrash/></button>
@@ -80,6 +82,7 @@ function Satrov() {
           <tr className="table-row">
             <td className="table-row-item">LINDY SAFIRA</td>
             <td className="table-row-item">544231001</td>
+            <td className="table-row-item">XI RPL 4</td>
             <td className="table-row-item action">
               <button className="btn-edit"><BiSolidPencil/></button>
               <button className="btn-delete"><FaTrash/></button>  
@@ -88,7 +91,7 @@ function Satrov() {
         </tbody>
       </table>
       <button className="edit-data-btn" onClick={handleTambahData}>
-          <MdOutlineAdd className="addicon" />
+          <IoPeople className="accicon" />
       </button>
     </div>
     <BackButton />
