@@ -88,7 +88,7 @@ font-size: 2rem;
   
   .table-anggota th,
   .table-anggota td {
-    padding: 30px 50px; /* Coba kurangi padding, terutama padding horizontal */
+    padding: 30px 80px; /* Coba kurangi padding, terutama padding horizontal */
     text-align: left;
     white-space: nowrap;       /* >>> cegah turun baris */
     overflow: hidden;

@@ -3,38 +3,36 @@ import SatryaRover from "../assets/satrya-rover.png";
 import { BiSolidPencil } from "react-icons/bi";
 import { FaTrash } from "react-icons/fa";
 import { MdOutlineAdd } from "react-icons/md";
-import BackButton from "../components/ButtonBack"
+import PhotoProfile from "../assets/user-profile.png";
+import BackButton from "../components/ButtonBack";
 import Swal from "sweetalert2";
 import './Satrov.css';
 
 function Satrov() {
   const handleTambahData = () => {
     Swal.fire({
-      title: 'Edit Data Anggota',
+      title: 'Tambah Data Anggota',
       html: `
-        <div class="form-container">
-          <label for="nama">PILIH SISWA</label>
-          <select id="nama" class="swal2-input">
-          <option value="">Pilih Siswa</option>
-          <option value="BACO ANDAYANA BIN BASO">BACO ANDAYANA BIN BASO</option>
-          <option value="LINDY SAFIRA">LINDY SAFIRA</option>
-          </select>
+       <div class="form-container">
+          <label for="nama">Nama</label>
+          <input type="text" id="nama" class="swal2-input">
           <label for="jabatan">JABATAN</label>
           <select id="jabatan" class="swal2-input">
           <option value="">Pilih Jabatan</option>
           <option value="Anggota">Anggota</option>
+          <option value="Ketua Putra">Pembina putra</option>
+          <option value="Ketua Putra">Pembina putri</option>
           <option value="Ketua Putra">Ketua putra</option>
           <option value="Ketua Putri">Ketua putri</option>
-          <option value="Pembina Putra">Pembina Putra</option>
-          <option value="Pembina Putri">Pembina Putri</option>
           </select>
-        </div>`,
-        confirmButtonText: 'Confirm',
-        showCloseButton: true,
-        customClass: {
-          popup: 'tambah-data-popup',
-          confirmButton: 'confirm-btn',
-          title: 'edit-data-title',
+        </div>
+    `,
+    confirmButtonText: "Confirm",
+    showCloseButton: true,
+    customClass: {
+      title: "edit-data-title",
+      popup: "tambah-data-popup",
+      confirmButton: "confirm-btn",
         },
       preConfirm: () => {
         const nama = document.getElementById('nama').value;

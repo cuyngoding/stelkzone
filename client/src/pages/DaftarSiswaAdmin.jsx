@@ -80,58 +80,105 @@ function DaftarSiswaAdmin() {
   };
 
   const handleTambahData = async () => {
-    const result = await MySwal.fire({
-      html: `
-        <div class="form-container">
-          <img src="${PhotoProfile}" alt="profile" class="profile-icon"/>
-          <label for="nama">NAMA</label>
-          <input id="nama" type="text" class="swal2-input" />
-          <div style="display: flex; gap: 10px;">
-            <div style="flex: 1;">
-              <label class="nis-label" for="nis">NIS</label>
-              <input id="nis" type="text" class="swal2-input" />
-            </div>
-            <div style="flex: 1;">
-              <label class="nisn-label" for="nisn">NISN</label>
-              <input id="nisn" type="text" class="swal2-input" />
-            </div>
-          </div>
-          <label class="tgl-label" for="tgl">TANGGAL LAHIR</label>
-          <input id="tgl" type="date" class="swal2-input" />
-          <label class="alamat-label" for="alamat">ALAMAT</label>
-          <input id="alamat" type="text" class="swal2-input" />
-        </div>
-      `,
-      confirmButtonText: "Confirm",
+    const pilihan = await MySwal.fire({
+      title: "Pilih Metode Penambahan",
+      icon: "warning",
+      showDenyButton: true,
       showCloseButton: true,
-      customClass: {
-        popup: "tambah-data-popup",
-        confirmButton: "confirm-btn",
-      },
-      buttonsStyling: false,
-      preConfirm: () => ({
-        nama: document.getElementById("nama").value,
-        nis: document.getElementById("nis").value,
-        nisn: document.getElementById("nisn").value,
-        tanggal_lahir: document.getElementById("tgl").value,
-        alamat: document.getElementById("alamat").value,
-      }),
+      confirmButtonText: "Input Manual",
+      denyButtonText: "Upload Excel",
     });
 
-    if (result.isConfirmed) {
-      try {
-        const token = getToken();
-        await axios.post("http://localhost:8000/api/siswas", result.value, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    if (pilihan.isConfirmed) {
+      const result = await MySwal.fire({
+        html: `
+          <div class="form-container">
+            <img src="${PhotoProfile}" alt="profile" class="profile-icon"/>
+            <label for="nama">NAMA</label>
+            <input id="nama" type="text" class="swal2-input" />
+            <div style="display: flex; gap: 10px;">
+              <div style="flex: 1;">
+                <label class="nis-label" for="nis">NIS</label>
+                <input id="nis" type="text" class="swal2-input" />
+              </div>
+              <div style="flex: 1;">
+                <label class="nisn-label" for="nisn">NISN</label>
+                <input id="nisn" type="text" class="swal2-input" />
+              </div>
+            </div>
+            <label class="tgl-label" for="tgl">TANGGAL LAHIR</label>
+            <input id="tgl" type="date" class="swal2-input" />
+            <label class="alamat-label" for="alamat">ALAMAT</label>
+            <input id="alamat" type="text" class="swal2-input" />
+          </div>
+        `,
+        confirmButtonText: "Confirm",
+        showCloseButton: true,
+        customClass: {
+          popup: "tambah-data-popup",
+          confirmButton: "confirm-btn",
+        },
+        buttonsStyling: false,
+        preConfirm: () => ({
+          nama: document.getElementById("nama").value,
+          nis: document.getElementById("nis").value,
+          nisn: document.getElementById("nisn").value,
+          tanggal_lahir: document.getElementById("tgl").value,
+          alamat: document.getElementById("alamat").value,
+        }),
+      });
 
-        await fetchSiswa();
-        Swal.fire("Berhasil!", "Data siswa ditambahkan.", "success");
-      } catch (error) {
-        console.error("Gagal tambah siswa:", error);
-        Swal.fire("Gagal!", "Terjadi kesalahan saat menambah siswa.", "error");
+      if (result.isConfirmed) {
+        try {
+          const token = getToken();
+          await axios.post("http://localhost:8000/api/siswas", result.value, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          await fetchSiswa();
+          Swal.fire("Berhasil!", "Data siswa ditambahkan.", "success");
+        } catch (error) {
+          console.error("Gagal tambah siswa:", error);
+          Swal.fire("Gagal!", "Terjadi kesalahan saat menambah siswa.", "error");
+        }
+      }
+    } else if (pilihan.isDenied) {
+      const result = await MySwal.fire({
+        title: "Upload File Excel",
+        html: `<input type="file" id="excelFile" class="swal2-file" accept=".xlsx,.xls" />`,
+        confirmButtonText: "Upload",
+        showCancelButton: true,
+        preConfirm: () => {
+          const fileInput = document.getElementById("excelFile");
+          if (!fileInput.files[0]) {
+            Swal.showValidationMessage("Harap pilih file Excel terlebih dahulu.");
+            return false;
+          }
+          return fileInput.files[0];
+        },
+      });
+
+      if (result.isConfirmed && result.value) {
+        const formData = new FormData();
+        formData.append("file", result.value);
+
+        try {
+          const token = getToken();
+          await axios.post("http://localhost:8000/api/siswas/import", formData, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          });
+
+          await fetchSiswa();
+          Swal.fire("Berhasil!", "Data dari file Excel berhasil diimport.", "success");
+        } catch (error) {
+          console.error("Gagal import siswa:", error);
+          Swal.fire("Gagal!", "Terjadi kesalahan saat import file Excel.", "error");
+        }
       }
     }
   };
@@ -141,11 +188,7 @@ function DaftarSiswaAdmin() {
       <NavbarAdmin />
       <div className="ekskulLainnya-page">
         <div className="search-container">
-          <input
-            className="bar-search"
-            type="text"
-            placeholder="Search . . ."
-          />
+          <input className="bar-search" type="text" placeholder="Search . . ." />
           <button className="search-btn" type="search">
             GO
           </button>
