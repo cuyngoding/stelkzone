@@ -43,5 +43,6 @@ Route::middleware('auth:pembina')->group(function () {
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::get('/admin', fn () => response()->json(['message' => 'Selamat datang, Admin!']));
     Route::apiResource('/siswas', SiswaController::class);
+    Route::post('/siswas/import', [SiswaController::class, 'import']); // ← route import
     Route::apiResource('/pembinas', PembinaController::class);
 });

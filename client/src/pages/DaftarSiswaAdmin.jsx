@@ -151,13 +151,25 @@ function DaftarSiswaAdmin() {
         confirmButtonText: "Upload",
         showCancelButton: true,
         preConfirm: () => {
-          const fileInput = document.getElementById("excelFile");
-          if (!fileInput.files[0]) {
-            Swal.showValidationMessage("Harap pilih file Excel terlebih dahulu.");
-            return false;
-          }
-          return fileInput.files[0];
-        },
+        const fileInput = document.getElementById("excelFile");
+        const file = fileInput.files[0];
+        if (!file) {
+          Swal.showValidationMessage("Harap pilih file Excel terlebih dahulu.");
+          return false;
+        }
+
+        const allowedTypes = [
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.ms-excel",
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+          Swal.showValidationMessage("File harus berupa Excel (.xlsx atau .xls)");
+          return false;
+        }
+
+        return file;
+      },
       });
 
       if (result.isConfirmed && result.value) {

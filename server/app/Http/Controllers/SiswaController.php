@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\SiswaImport;
+use Illuminate\Support\Facades\Log;
 
 class SiswaController extends Controller
 {
-    // GET /api/siswa
     public function index()
     {
         return response()->json(Siswa::all(), 200);
     }
 
-    // POST /api/siswa
     public function store(Request $request)
     {
         $request->validate([
@@ -24,12 +25,10 @@ class SiswaController extends Controller
             'tanggal_lahir' => 'nullable|date',
             'alamat' => 'required|string',
         ]);
-    
-        // Generate email dan hash password berdasarkan NIS
+
         $email = $request->nis . '@gmail.com';
         $password = Hash::make($request->nis);
-    
-        // Simpan semua ke tabel siswas
+
         $siswa = Siswa::create([
             'nama' => $request->nama,
             'nis' => $request->nis,
@@ -52,10 +51,8 @@ class SiswaController extends Controller
                 'tanggal_lahir' => $siswa->tanggal_lahir,
             ]
         ], 201);
-
     }
 
-    // GET /api/siswa/{id}
     public function show(string $id)
     {
         $siswa = Siswa::find($id);
@@ -67,7 +64,6 @@ class SiswaController extends Controller
         return response()->json($siswa);
     }
 
-    // PUT /api/siswa/{id}
     public function update(Request $request, string $id)
     {
         $siswa = Siswa::find($id);
@@ -89,7 +85,6 @@ class SiswaController extends Controller
         return response()->json($siswa);
     }
 
-    // DELETE /api/siswa/{id}
     public function destroy(string $id)
     {
         $siswa = Siswa::find($id);
@@ -101,4 +96,23 @@ class SiswaController extends Controller
         $siswa->delete();
         return response()->json(['message' => 'Siswa berhasil dihapus']);
     }
+
+    // 🔽 Tambahkan ini di akhir file
+    public function import(Request $request)
+{
+    $request->validate([
+        'file' => 'required|file|mimes:xlsx,xls',
+    ]);
+
+    try {
+        Excel::import(new SiswaImport, $request->file('file'));
+        return response()->json(['message' => 'Data siswa berhasil diimport'], 200);
+    } catch (\Exception $e) {
+        Log::error('IMPORT SISWA ERROR: ' . $e->getMessage());
+        return response()->json([
+            'message' => 'Gagal mengimpor data',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 }
