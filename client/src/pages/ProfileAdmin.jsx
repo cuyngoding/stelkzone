@@ -1,7 +1,8 @@
 import "./ProfileAdmin.css";
 import Navbar from "../components/NavbarAdmin";
 import PhotoUser from "../assets/user-profile.png";
-import BackButton from "../components/ButtonBack"
+import BackButton from "../components/ButtonBack";
+import { BiSolidPencil } from "react-icons/bi";
 
 function Profile() {
   return (
@@ -11,7 +12,7 @@ function Profile() {
         <div className="content-container">
           <img className="profile-photo" src={PhotoUser} alt="" />
           <h1 className="user-name-profile-admin">ADMIN STELK</h1>
-          <div className="nis-nisn">
+          <div className="info-profile">
             <label className="nip" htmlFor="">
               NIP
             </label>
@@ -25,6 +26,7 @@ function Profile() {
             </label>
             <input type="text" name="" id="" className="alamat-value-pembina" value="-" />
           </div>
+          <button className="edit-data-btn"><BiSolidPencil /></button>
           <BackButton/>
         </div>
       </div>

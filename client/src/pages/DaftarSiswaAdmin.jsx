@@ -108,6 +108,8 @@ function DaftarSiswaAdmin() {
             </div>
             <label class="tgl-label" for="tgl">TANGGAL LAHIR</label>
             <input id="tgl" type="date" class="swal2-input" />
+            <label for="kelas">KELAS</label>
+            <input id="kelassiswa" type="text" class="swal2-input"/>
             <label class="alamat-label" for="alamat">ALAMAT</label>
             <input id="alamat" type="text" class="swal2-input" />
           </div>
@@ -141,7 +143,11 @@ function DaftarSiswaAdmin() {
           Swal.fire("Berhasil!", "Data siswa ditambahkan.", "success");
         } catch (error) {
           console.error("Gagal tambah siswa:", error);
-          Swal.fire("Gagal!", "Terjadi kesalahan saat menambah siswa.", "error");
+          Swal.fire(
+            "Gagal!",
+            "Terjadi kesalahan saat menambah siswa.",
+            "error"
+          );
         }
       }
     } else if (pilihan.isDenied) {
@@ -151,25 +157,29 @@ function DaftarSiswaAdmin() {
         confirmButtonText: "Upload",
         showCancelButton: true,
         preConfirm: () => {
-        const fileInput = document.getElementById("excelFile");
-        const file = fileInput.files[0];
-        if (!file) {
-          Swal.showValidationMessage("Harap pilih file Excel terlebih dahulu.");
-          return false;
-        }
+          const fileInput = document.getElementById("excelFile");
+          const file = fileInput.files[0];
+          if (!file) {
+            Swal.showValidationMessage(
+              "Harap pilih file Excel terlebih dahulu."
+            );
+            return false;
+          }
 
-        const allowedTypes = [
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-          "application/vnd.ms-excel",
-        ];
+          const allowedTypes = [
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/vnd.ms-excel",
+          ];
 
-        if (!allowedTypes.includes(file.type)) {
-          Swal.showValidationMessage("File harus berupa Excel (.xlsx atau .xls)");
-          return false;
-        }
+          if (!allowedTypes.includes(file.type)) {
+            Swal.showValidationMessage(
+              "File harus berupa Excel (.xlsx atau .xls)"
+            );
+            return false;
+          }
 
-        return file;
-      },
+          return file;
+        },
       });
 
       if (result.isConfirmed && result.value) {
@@ -178,18 +188,30 @@ function DaftarSiswaAdmin() {
 
         try {
           const token = getToken();
-          await axios.post("http://localhost:8000/api/siswas/import", formData, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "multipart/form-data",
-            },
-          });
+          await axios.post(
+            "http://localhost:8000/api/siswas/import",
+            formData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
 
           await fetchSiswa();
-          Swal.fire("Berhasil!", "Data dari file Excel berhasil diimport.", "success");
+          Swal.fire(
+            "Berhasil!",
+            "Data dari file Excel berhasil diimport.",
+            "success"
+          );
         } catch (error) {
           console.error("Gagal import siswa:", error);
-          Swal.fire("Gagal!", "Terjadi kesalahan saat import file Excel.", "error");
+          Swal.fire(
+            "Gagal!",
+            "Terjadi kesalahan saat import file Excel.",
+            "error"
+          );
         }
       }
     }
@@ -200,7 +222,11 @@ function DaftarSiswaAdmin() {
       <NavbarAdmin />
       <div className="ekskulLainnya-page">
         <div className="search-container">
-          <input className="bar-search" type="text" placeholder="Search . . ." />
+          <input
+            className="bar-search"
+            type="text"
+            placeholder="Search . . ."
+          />
           <button className="search-btn" type="search">
             GO
           </button>

@@ -11,7 +11,7 @@ function Profile() {
         <div className="content-container">
           <img className="profile-photo" src={PhotoUser} alt="" />
           <h1 className="user-name-profile">HARYADI INDRAWIJAYA</h1>
-          <div className="nis-nisn">
+          <div className="info-profile">
             <label className="nip" htmlFor="">
               NIP
             </label>

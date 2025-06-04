@@ -51,7 +51,7 @@ function ProfilePembinaAdmin() {
             pembina.nama
           }" />
           <label for="nip">NIP</label>
-          <input id="nip" type="text" class="swal2-input" value="${
+          <input id="nipedit" type="text" class="swal2-input nipedit" value="${
             pembina.nip || ""
           }" />
           <label for="tgl">TANGGAL LAHIR</label>
@@ -112,10 +112,10 @@ function ProfilePembinaAdmin() {
       <div className="content-container">
         <img className="profile-photo" src={PhotoUser} alt={pembina.nama} />
         <h1 className="user-name-profile">{pembina.nama}</h1>
-        <div className="nis-nisn">
+        <div className="info-profile">
           <label className="nip">NIP</label>
           <input
-            className="nip-value-pembinaadmin"
+            className="nip-value"
             type="text"
             value={pembina.nip || ""}
             readOnly

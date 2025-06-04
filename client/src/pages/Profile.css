@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Geist+Mono:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
+
 .profile-page {
-    max-width: 100dvw;
+    max-width: 50dvw;
+    /* max-height: 100vh; */
+    height: 101.9vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow: hidden;
+    /* border: 1px solid #ff0000; */
 }
 .content-container {
     display: flex;
@@ -12,14 +19,14 @@
 .profile-photo {
     width: 150px;
     position: absolute  ;
-    top: 90px;
+    top: 100px;
     left: 43rem;
     z-index: 100;
 }
 
 .user-name-profile {
     position: absolute;
-    top: 230px;
+    top: 200px;
     left: 35rem;
     font-size: 30px;
     z-index: 100;
@@ -29,86 +36,114 @@
 .nis-nisn {
     display: flex;
     position: relative;
-    top: 360px;
-    right: 200px;
+    left: 10px;
+    width: fit-content;
+    padding-bottom: 50vh;
+    width: 1000px;
+    padding: 200px;
+    /* border: 1px solid #000; */
 }
 
 .nis{
     font-weight: 700;
     position: relative;
-    bottom: 2.800rem;
-    left: 42rem;
+    bottom: 10rem;
+    left: 11rem;
 }
 
  .nis-value {
-    padding: 10px;    
-    width: 350px;
+    padding: 10px;
+    width: 500px;
+    padding-right: 115px;
     font-weight: 600;
     font-size: medium;
     border-radius: 5px;
     outline: none;
     border: 2px solid #d1d1d1;
     position: relative;
-    left: 40rem;
-    bottom: 1.200rem;
+    left: 9rem;
+    bottom: 8rem;
 }
 
 .nisn {
     font-weight: 700;
     position: relative;
-    bottom: 2.900rem;
-    left: 46rem;
+    bottom: 10rem;
+    left: 9.600rem;
 }
 
 .nisn-value {
-    padding: 10px;    
-    width: 350px;
+    padding: 10px; 
+    padding-right: 115px;
+    width: 500px;
     font-weight: 600;
     font-size: medium;
     border-radius: 5px;
     outline: none;
     border: 2px solid #d1d1d1;
     position: relative;
-    left: 43.500rem;
-    bottom: 1.250rem;
+    left: 7rem;
+    bottom: 8rem;
 }
 
 .tanggal-lahir {
     font-weight: 700;
+    font-size: medium;
     width: 130px;
     position: absolute;
-    top: 3.500rem;
-    left: 41.850rem;
+    top: 8.700rem;
+    left: 23.100rem;
+    
 }
 
 .tanggal-lahir-value {
     padding: 10px;    
     width: 500px;
+    padding-right: 219px;
     font-weight: 600; 
     border-radius: 5px;
     outline: none;
     border: 2px solid #d1d1d1;
     position: relative;
-    top: 5rem;
-    right: 9rem;
+    bottom: 35px;
+    right: 36.0rem;
+}
+.kelas {
+    font-weight: 700;
+    position: absolute;
+    top: 8.700rem;
+    left: 45.400rem;
+}
+#kelas {
+    padding: 10px;    
+    width: 600px;
+    padding-right: 150px;
+    font-weight: 600; 
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid #d1d1d1;
+    position: relative;
+    bottom: 2.250rem;
+    right: 35.600rem;
 }
 .alamat {
     font-weight: 700; 
     position: absolute;
-    left: 42rem;
-    top: 10rem;
+    left: 43rem;
+    top: 14rem;
 }
 
 .alamat-value {
     padding: 10px;    
-    width: 500px;
+    width: 400px;
+    padding-right: 500px;
     font-weight: 600; 
     border-radius: 5px;
     outline: none;
     border: 2px solid #d1d1d1;
     position: relative;
-    top: 12rem;
-    right: 41.500rem;
+    top:  3.500rem;
+    right: 78.700rem;
 }
 
 .edit-data-btn {

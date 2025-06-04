@@ -165,7 +165,7 @@
 
 .tambah-data-popup input.swal2-input {
   border-radius: 12px;
-  width: 300px;
+  width: 600px;
   box-sizing: border-box;
   border: none;
   margin-bottom: 20px;
@@ -178,9 +178,7 @@
 #nama {
   width: 700px;
 }
-#nip {
-  width: 700px;
-}
+
 .nis-value-profilesiswaadmin {
   position: relative;
   left: 640px;
