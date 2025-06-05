@@ -26,7 +26,6 @@ function Profile() {
             </label>
             <input type="text" name="" id="" className="alamat-value-pembina" value="-" />
           </div>
-          <button className="edit-data-btn"><BiSolidPencil /></button>
           <BackButton/>
         </div>
       </div>

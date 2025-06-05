@@ -24,6 +24,8 @@ function Profile() {
               TANGGAL LAHIR
             </label>
             <input className="tanggal-lahir-value" type="date" name="" id="" />
+             <label className="kelas">KELAS</label>
+          <input className="Kelas-value" id="kelas" type="text" value={siswa.kelas || ""} readOnly />
             <label htmlFor="" className="alamat">
               ALAMAT
             </label>

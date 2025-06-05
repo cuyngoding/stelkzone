@@ -67,7 +67,7 @@ function Profile() {
             readOnly
           />
           <label className="kelas">KELAS</label>
-          <input className="Kelas-value" type="text" value={siswa.kelas || ""} readOnly />
+          <input className="Kelas-value" id="kelas" type="text" value={siswa.kelas || ""} readOnly />
           <label className="alamat">ALAMAT</label>
           <input className="alamat-value" type="text" value={siswa.alamat || ""} readOnly />
         </div>

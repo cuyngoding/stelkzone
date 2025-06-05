@@ -44,7 +44,7 @@
 
 .user-name-admin {
     position: relative;
-    left: 420px;
+    left: 395px;
     text-decoration: none;
     color: black;
     font-weight: 700;
@@ -52,16 +52,18 @@
     margin: 5px;
     margin-top: 10px;
     font-size: 20px;
+    z-index: 100;
 }
 
 .user-photo-admin {
-    position: relative;
-    left: 630px;
+   position: relative;
+    left: 610px;
     margin: 5px;
     margin-top: 10px;
     width: 49px;
     height: 49px;
     cursor: pointer;
+    z-index: 100;
 }
 
 .btn-logout-admin {
@@ -76,14 +78,16 @@
     width: 120px;
     position: relative;
     top: 15px;
-    left: 520px;
+    left: 490px;
     cursor: pointer;
+    z-index: 100;
     transition: 0.3s ease-in-out;
 }
 
 .btn-logout-admin:hover {
     box-shadow: 1px 2px 5px #B90303;
     transform: translateY(-5px);
+    z-index: 100;
 }
 
 .sidebar-offcanvas-container {

@@ -44,12 +44,13 @@
 
 .user-photo-pembina {
     position: relative;
-    left: 716px;
+    left: 660px;
     margin: 5px;
     margin-top: 10px;
     width: 49px;
     height: 49px;
     cursor: pointer;
+    z-index: 100;
 }
 
 .user-name-pembina {
@@ -62,6 +63,7 @@
     margin: 5px;
     margin-top: 10px;
     font-size: 20px;
+    z-index: 100;
 }
 
 .btn-logout-pembina {
@@ -78,6 +80,7 @@
     top: 15px;
     left: 490px;
     cursor: pointer;
+    z-index: 100;
     transition: 0.3s ease-in-out;
 }
 

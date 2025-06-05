@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; // ← tambahkan useEffect
+import { useState, useEffect } from "react";
 import "./Navbar.css";
 import { LuMenu } from "react-icons/lu";
 import { GoHomeFill } from "react-icons/go";
@@ -6,13 +6,13 @@ import { FaUser } from "react-icons/fa";
 import { FaUsersGear } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import PhotoProfile from "../assets/user-profile.png";
-import { logout, getToken } from "../utils/auth"; // ← pastikan getToken juga di-import
-import axios from "axios"; // ← tambahkan axios
+import { logout, getToken } from "../utils/auth";
+import axios from "axios";
 
 function Navbar() {
   const navigate = useNavigate();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const [siswa, setSiswa] = useState({ nama: "" }); // ⬅️ state nama siswa
+  const [siswa, setSiswa] = useState({ nama: "" });
 
   useEffect(() => {
     const fetchSiswa = async () => {
@@ -50,15 +50,17 @@ function Navbar() {
         <button className="button-menu" onClick={toggleSidebar}>
           <LuMenu className="menu-icon" />
         </button>
-        <div className="profile">
+
+        <div className="user-info">
           <img
             className="user-photo"
             src={PhotoProfile}
             alt="User Profile"
             onClick={toprofile}
           />
-          <span className="user-name">{siswa.nama || "Siswa"}</span>
+          <div className="user-name-siswa">{siswa.nama || "Siswa"}</div>
         </div>
+
         <button className="btn-logout" onClick={handleLogout}>
           Log out
         </button>
