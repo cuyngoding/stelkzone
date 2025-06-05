@@ -14,12 +14,14 @@ const MySwal = withReactContent(Swal);
 function ProfileSiswaAdmin() {
   const { id } = useParams(); // Ambil ID dari URL
   const [siswa, setSiswa] = useState({
-    nama: "",
-    nis: "",
-    nisn: "",
-    tanggal_lahir: "",
-    alamat: "",
-  });
+  nama: "",
+  nis: "",
+  nisn: "",
+  tanggal_lahir: "",
+  alamat: "",
+  kelas: "", // ✅ Tambahkan ini
+});
+
 
   useEffect(() => {
     const fetchSiswa = async () => {
@@ -33,12 +35,14 @@ function ProfileSiswaAdmin() {
         const data = res.data;
 
         setSiswa({
-          nama: data.nama,
-          nis: data.nis,
-          nisn: data.nisn,
-          tanggal_lahir: data.tanggal_lahir,
-          alamat: data.alamat,
-        });
+  nama: data.nama,
+  nis: data.nis,
+  nisn: data.nisn,
+  tanggal_lahir: data.tanggal_lahir,
+  alamat: data.alamat,
+  kelas: data.kelas, // ✅ Ambil dari response
+});
+
       } catch (error) {
         console.error("Gagal mengambil data siswa:", error);
       }
@@ -76,7 +80,7 @@ function ProfileSiswaAdmin() {
             formatTanggal(siswa.tanggal_lahir) || ""
           }" />
           <label for="kelas">KELAS</label>
-          <input id="kelassiswa" type="text" class="swal2-input" value="X RPL 1"/>
+          <input id="kelassiswa" type="text" class="swal2-input" value="${siswa.kelas || ''}"/>
           <label for="alamat">ALAMAT</label>
           <input id="alamat" type="text" class="swal2-input" value="${
             siswa.alamat || ""
@@ -92,12 +96,14 @@ function ProfileSiswaAdmin() {
       },
       buttonsStyling: false,
       preConfirm: () => ({
-        nama: document.getElementById("nama").value,
-        nis: document.getElementById("nis").value,
-        nisn: document.getElementById("nisn").value,
-        tanggal_lahir: document.getElementById("tgl").value,
-        alamat: document.getElementById("alamat").value,
-      }),
+      nama: document.getElementById("nama").value,
+      nis: document.getElementById("nis").value,
+      nisn: document.getElementById("nisn").value,
+      tanggal_lahir: document.getElementById("tgl").value,
+      alamat: document.getElementById("alamat").value,
+      kelas: document.getElementById("kelassiswa").value, // ✅ Ambil dari input kelas
+    })
+
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -111,7 +117,7 @@ function ProfileSiswaAdmin() {
               },
             }
           );
-          setSiswa(result.value);
+          setSiswa((prev) => ({ ...prev, ...result.value }));
           Swal.fire("Berhasil!", "Data siswa berhasil diupdate.", "success");
         } catch (error) {
           console.error("Gagal update data siswa:", error);
@@ -166,12 +172,13 @@ function ProfileSiswaAdmin() {
             />
             <label className="kelas">KELAS</label>
             <input
-              className="Kelas-value"
-              type="text"
-              id="kelas"
-              value={"X RPL 1"}
-              readOnly
-            />
+            className="Kelas-value"
+            type="text"
+            id="kelas"
+            value={siswa.kelas || ""}
+            readOnly
+          />
+
             <label htmlFor="" className="alamat">
               ALAMAT
             </label>

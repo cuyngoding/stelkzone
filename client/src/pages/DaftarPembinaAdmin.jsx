@@ -15,21 +15,24 @@ const MySwal = withReactContent(Swal);
 function DaftarPembinaAdmin() {
   const navigate = useNavigate();
   const [pembinaList, setPembinaList] = useState([]);
+  const [searchNip, setSearchNip] = useState("");
+  const [queryNip, setQueryNip] = useState(""); // nilai untuk trigger pencarian
 
   useEffect(() => {
     fetchPembina();
-  }, []);
+  }, [queryNip]);
 
   const fetchPembina = async () => {
     try {
       const token = getToken();
-      const res = await axios.get("http://localhost:8000/api/pembinas", {
+      const res = await axios.get(`http://localhost:8000/api/pembinas?search=${queryNip}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       const pembinaData = res.data.map((p) => ({
         id: p.id,
         name: p.nama,
+        nip: p.nip,
         icon: PhotoProfile,
       }));
 
@@ -127,9 +130,7 @@ function DaftarPembinaAdmin() {
     } else if (metode.isDenied) {
       Swal.fire({
         title: 'Upload File Excel',
-        html: `
-          <input type="file" id="excelFile" class="swal2-file" accept=".xlsx, .xls" />
-        `,
+        html: `<input type="file" id="excelFile" class="swal2-file" accept=".xlsx, .xls" />`,
         confirmButtonText: 'Upload',
         showCancelButton: true,
         preConfirm: async () => {
@@ -167,8 +168,19 @@ function DaftarPembinaAdmin() {
       <NavbarAdmin />
       <div className="ekskulLainnya-page">
         <div className="search-container">
-          <input className="bar-search" type="text" placeholder="Search . . ." />
-          <button className="search-btn">GO</button>
+          <input
+            className="bar-search"
+            type="text"
+            placeholder="Cari berdasarkan NIP..."
+            value={searchNip}
+            onChange={(e) => setSearchNip(e.target.value)}
+          />
+          <button
+            className="search-btn"
+            onClick={() => setQueryNip(searchNip)}
+          >
+            GO
+          </button>
           <button className="tambah-data-btn" onClick={handleTambahData}>
             <IoMdAdd />
           </button>
@@ -181,6 +193,7 @@ function DaftarPembinaAdmin() {
                 <img src={pembina.icon} alt={pembina.name} className="eskul-icon" />
                 <div className="eskul-info">
                   <h2>{pembina.name}</h2>
+                  <p>{pembina.nip}</p>
                 </div>
                 <div className="eskul-members">
                   <button className="hapus-data-btn" onClick={() => handleHapusPembina(pembina.id)}>

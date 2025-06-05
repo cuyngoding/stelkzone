@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // ← tambahkan useEffect
 import "./Navbar.css";
 import { LuMenu } from "react-icons/lu";
 import { GoHomeFill } from "react-icons/go";
@@ -6,15 +6,34 @@ import { FaUser } from "react-icons/fa";
 import { FaUsersGear } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import PhotoProfile from "../assets/user-profile.png";
-import { logout } from "../utils/auth"; // Import fungsi logout
+import { logout, getToken } from "../utils/auth"; // ← pastikan getToken juga di-import
+import axios from "axios"; // ← tambahkan axios
 
 function Navbar() {
   const navigate = useNavigate();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [siswa, setSiswa] = useState({ nama: "" }); // ⬅️ state nama siswa
+
+  useEffect(() => {
+    const fetchSiswa = async () => {
+      try {
+        const token = getToken();
+        const res = await axios.get("http://localhost:8000/api/siswa/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setSiswa(res.data);
+      } catch (err) {
+        console.error("Gagal mengambil data siswa di navbar:", err);
+      }
+    };
+    fetchSiswa();
+  }, []);
 
   const handleLogout = async () => {
-    await logout(); // Panggil fungsi logout dari auth.js
-    navigate("/"); // Redirect ke halaman login setelah logout
+    await logout();
+    navigate("/");
   };
 
   const toprofile = () => {
@@ -38,9 +57,7 @@ function Navbar() {
             alt="User Profile"
             onClick={toprofile}
           />
-          <a href="/profile/siswa" className="user-name">
-            BACO ANDAYANA BIN BASO
-          </a>
+          <span className="user-name">{siswa.nama || "Siswa"}</span>
         </div>
         <button className="btn-logout" onClick={handleLogout}>
           Log out

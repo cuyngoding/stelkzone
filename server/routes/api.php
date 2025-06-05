@@ -26,23 +26,40 @@ Route::middleware('auth:sanctum')->group(function () {
 // 🛡️ SISWA PROTECTED ROUTES
 Route::middleware('auth:siswa')->group(function () {
     Route::get('/siswa', fn () => response()->json(['message' => 'Halo, Siswa!']));
+    
     Route::get('/siswa/profile', fn (\Illuminate\Http\Request $request) => response()->json([
         'id' => $request->user()->id,
         'nama' => $request->user()->nama,
         'nis' => $request->user()->nis,
+        'nisn' => $request->user()->nisn,
+        'tanggal_lahir' => $request->user()->tanggal_lahir,
+        'alamat' => $request->user()->alamat,
+        'kelas' => $request->user()->kelas,
     ]));
 });
+
 
 // 🛡️ PEMBINA PROTECTED ROUTES
 Route::middleware('auth:pembina')->group(function () {
     Route::get('/pembina', fn () => response()->json(['message' => 'Hai, Pembina!']));
-    // Tambahkan route khusus pembina di sini jika ada
+    Route::get('/pembina/profile', fn (\Illuminate\Http\Request $request) => response()->json([
+    'id' => $request->user()->id,
+    'nama' => $request->user()->nama,
+    'nip' => $request->user()->nip,
+    'tanggal_lahir' => $request->user()->tanggal_lahir,
+    'alamat' => $request->user()->alamat,
+]));
+
 });
+
 
 // 👑 ADMIN PROTECTED ROUTES
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::get('/admin', fn () => response()->json(['message' => 'Selamat datang, Admin!']));
     Route::apiResource('/siswas', SiswaController::class);
     Route::post('/siswas/import', [SiswaController::class, 'import']); // ← route import
+    Route::post('/pembinas/import', [PembinaController::class, 'import']);
     Route::apiResource('/pembinas', PembinaController::class);
+    Route::get('/siswas/search', [SiswaController::class, 'search']);
+    Route::get('/pembinas/search', [PembinaController::class, 'search']);
 });

@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pembina;
+use App\Imports\PembinaImport;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
 
 class PembinaController extends Controller
 {
-    public function index()
-    {
-        return Pembina::all();
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -61,4 +60,35 @@ class PembinaController extends Controller
         $pembina->delete();
         return response()->json(['message' => 'Pembina deleted']);
     }
+    public function import(Request $request)
+{
+    $request->validate([
+        'file' => 'required|file|mimes:xlsx,xls',
+    ]);
+
+    try {
+        Excel::import(new PembinaImport, $request->file('file'));
+        return response()->json(['message' => 'Data siswa berhasil diimport'], 200);
+    } catch (\Exception $e) {
+        Log::error("IMPORT ERROR: " . $e->getMessage());
+        return response()->json([
+            'message' => 'Gagal mengimpor data',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+public function index(Request $request)
+{
+    $query = Pembina::query();
+
+    if ($search = $request->query('search')) {
+        $query->where(function ($q) use ($search) {
+            $q->where('nip', 'like', "%{$search}%")
+              ->orWhere('nama', 'like', "%{$search}%");
+        });
+    }
+
+    return response()->json($query->get(), 200);
+}
+
 }

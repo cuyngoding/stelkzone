@@ -11,10 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class SiswaController extends Controller
 {
-    public function index()
-    {
-        return response()->json(Siswa::all(), 200);
-    }
+    
 
     public function store(Request $request)
     {
@@ -24,20 +21,23 @@ class SiswaController extends Controller
             'nisn' => 'required|string|max:20|unique:siswas,nisn',
             'tanggal_lahir' => 'nullable|date',
             'alamat' => 'required|string',
+            'kelas' => 'required|string|max:100',
         ]);
 
         $email = $request->nis . '@gmail.com';
         $password = Hash::make($request->nis);
 
         $siswa = Siswa::create([
-            'nama' => $request->nama,
-            'nis' => $request->nis,
-            'nisn' => $request->nisn,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'alamat' => $request->alamat,
-            'email' => $email,
-            'password' => $password,
-        ]);
+        'nama' => $request->nama,
+        'nis' => $request->nis,
+        'nisn' => $request->nisn,
+        'tanggal_lahir' => $request->tanggal_lahir,
+        'alamat' => $request->alamat,
+        'kelas' => $request->kelas, // ← tambahkan ini
+        'email' => $email,
+        'password' => $password,
+    ]);
+
 
         return response()->json([
             'message' => 'Siswa berhasil ditambahkan.',
@@ -79,6 +79,7 @@ class SiswaController extends Controller
             'email' => 'sometimes|required|email|unique:siswas,email,' . $id,
             'tanggal_lahir' => 'sometimes|required|date',
             'alamat' => 'sometimes|required|string',
+            'kelas' => 'sometimes|required|string|max:100',
         ]);
 
         $siswa->update($validated);
@@ -108,11 +109,26 @@ class SiswaController extends Controller
         Excel::import(new SiswaImport, $request->file('file'));
         return response()->json(['message' => 'Data siswa berhasil diimport'], 200);
     } catch (\Exception $e) {
-        Log::error('IMPORT SISWA ERROR: ' . $e->getMessage());
+        Log::error("IMPORT ERROR: " . $e->getMessage());
         return response()->json([
             'message' => 'Gagal mengimpor data',
-            'error' => $e->getMessage()
+            'error' => $e->getMessage(),
         ], 500);
+        }
     }
+       public function index(Request $request)
+{
+    $query = Siswa::query();
+
+    if ($search = $request->query('search')) {
+        $query->where(function ($q) use ($search) {
+            $q->where('nis', 'like', "%{$search}%")
+              ->orWhere('nama', 'like', "%{$search}%");
+        });
+    }
+
+    return response()->json($query->get(), 200);
 }
+
+
 }

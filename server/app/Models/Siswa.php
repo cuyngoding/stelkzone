@@ -16,6 +16,7 @@ class Siswa extends Authenticatable
         'nisn',
         'tanggal_lahir',
         'alamat',
+        'kelas',
         'email',
         'password',
         'role',

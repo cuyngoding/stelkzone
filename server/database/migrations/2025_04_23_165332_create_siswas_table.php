@@ -17,6 +17,7 @@ return new class extends Migration
         $table->string('email')->unique();
         $table->string('alamat')->nullable();
         $table->string('password');
+        $table->string('kelas')->nullable();
         $table->string('role')->default('siswa');
         $table->rememberToken();
         $table->timestamps();

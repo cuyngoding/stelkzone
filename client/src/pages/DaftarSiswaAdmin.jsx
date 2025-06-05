@@ -16,11 +16,17 @@ const MySwal = withReactContent(Swal);
 function DaftarSiswaAdmin() {
   const navigate = useNavigate();
   const [siswaList, setSiswaList] = useState([]);
+  const [inputNis, setInputNis] = useState("");   // Untuk input pencarian
+  const [searchNis, setSearchNis] = useState(""); // Untuk trigger fetch
+
+  useEffect(() => {
+    fetchSiswa();
+  }, [searchNis]);
 
   const fetchSiswa = async () => {
     const token = getToken();
     try {
-      const res = await fetch("http://localhost:8000/api/siswas", {
+      const res = await fetch(`http://localhost:8000/api/siswas?search=${searchNis}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -32,6 +38,7 @@ function DaftarSiswaAdmin() {
       const siswaData = data.map((s) => ({
         id: s.id,
         name: s.nama,
+        nis: s.nis,
         icon: PhotoProfile,
         route: "#",
       }));
@@ -42,10 +49,6 @@ function DaftarSiswaAdmin() {
       setSiswaList([]);
     }
   };
-
-  useEffect(() => {
-    fetchSiswa();
-  }, []);
 
   const handleNavigate = (id) => {
     navigate(`/profile-siswa-admin/${id}`);
@@ -77,6 +80,10 @@ function DaftarSiswaAdmin() {
         Swal.fire("Gagal!", "Terjadi kesalahan saat menghapus data.", "error");
       }
     }
+  };
+
+  const handleSearchClick = () => {
+    setSearchNis(inputNis);
   };
 
   const handleTambahData = async () => {
@@ -122,12 +129,13 @@ function DaftarSiswaAdmin() {
         },
         buttonsStyling: false,
         preConfirm: () => ({
-          nama: document.getElementById("nama").value,
-          nis: document.getElementById("nis").value,
-          nisn: document.getElementById("nisn").value,
-          tanggal_lahir: document.getElementById("tgl").value,
-          alamat: document.getElementById("alamat").value,
-        }),
+        nama: document.getElementById("nama").value,
+        nis: document.getElementById("nis").value,
+        nisn: document.getElementById("nisn").value,
+        tanggal_lahir: document.getElementById("tgl").value,
+        alamat: document.getElementById("alamat").value,
+        kelas: document.getElementById("kelassiswa").value, // tambahkan ini
+      }),
       });
 
       if (result.isConfirmed) {
@@ -143,11 +151,7 @@ function DaftarSiswaAdmin() {
           Swal.fire("Berhasil!", "Data siswa ditambahkan.", "success");
         } catch (error) {
           console.error("Gagal tambah siswa:", error);
-          Swal.fire(
-            "Gagal!",
-            "Terjadi kesalahan saat menambah siswa.",
-            "error"
-          );
+          Swal.fire("Gagal!", "Terjadi kesalahan saat menambah siswa.", "error");
         }
       }
     } else if (pilihan.isDenied) {
@@ -160,9 +164,7 @@ function DaftarSiswaAdmin() {
           const fileInput = document.getElementById("excelFile");
           const file = fileInput.files[0];
           if (!file) {
-            Swal.showValidationMessage(
-              "Harap pilih file Excel terlebih dahulu."
-            );
+            Swal.showValidationMessage("Harap pilih file Excel terlebih dahulu.");
             return false;
           }
 
@@ -172,9 +174,7 @@ function DaftarSiswaAdmin() {
           ];
 
           if (!allowedTypes.includes(file.type)) {
-            Swal.showValidationMessage(
-              "File harus berupa Excel (.xlsx atau .xls)"
-            );
+            Swal.showValidationMessage("File harus berupa Excel (.xlsx atau .xls)");
             return false;
           }
 
@@ -188,30 +188,18 @@ function DaftarSiswaAdmin() {
 
         try {
           const token = getToken();
-          await axios.post(
-            "http://localhost:8000/api/siswas/import",
-            formData,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "multipart/form-data",
-              },
-            }
-          );
+          await axios.post("http://localhost:8000/api/siswas/import", formData, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          });
 
           await fetchSiswa();
-          Swal.fire(
-            "Berhasil!",
-            "Data dari file Excel berhasil diimport.",
-            "success"
-          );
+          Swal.fire("Berhasil!", "Data dari file Excel berhasil diimport.", "success");
         } catch (error) {
           console.error("Gagal import siswa:", error);
-          Swal.fire(
-            "Gagal!",
-            "Terjadi kesalahan saat import file Excel.",
-            "error"
-          );
+          Swal.fire("Gagal!", "Terjadi kesalahan saat import file Excel.", "error");
         }
       }
     }
@@ -225,9 +213,11 @@ function DaftarSiswaAdmin() {
           <input
             className="bar-search"
             type="text"
-            placeholder="Search . . ."
+            placeholder="Cari berdasarkan NIS..."
+            value={inputNis}
+            onChange={(e) => setInputNis(e.target.value)}
           />
-          <button className="search-btn" type="search">
+          <button className="search-btn" onClick={handleSearchClick}>
             GO
           </button>
           <button className="tambah-data-btn" onClick={handleTambahData}>
@@ -242,6 +232,7 @@ function DaftarSiswaAdmin() {
                 <img src={siswa.icon} alt={siswa.name} className="eskul-icon" />
                 <div className="eskul-info">
                   <h2>{siswa.name}</h2>
+                  <p>{siswa.nis}</p>
                 </div>
                 <div className="eskul-members">
                   <button

@@ -14,6 +14,7 @@
     "@nuxtjs/axios": "^5.13.6",
     "axios": "^1.7.9",
     "cookie-universal-nuxt": "^2.2.2",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
