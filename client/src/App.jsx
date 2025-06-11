@@ -117,7 +117,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route
             path="/dashboard/admin/daftar-pembina"
             element={
@@ -126,7 +125,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route
             path="/dashboard/admin"
             element={
@@ -162,7 +160,7 @@ function App() {
             }
           />
           <Route
-            path="/profile-siswa/pembina"
+            path="/profile-siswa/:id/pembina"
             element={
               <ProtectedRoute allowedRoles={["pembina"]}>
                 <ProfileSiswaPembina />
@@ -170,22 +168,18 @@ function App() {
             }
           />
           <Route
-            path="/profile-siswa/admin"
+            path="/profile-siswa-admin/:id"
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
                 <ProfileSiswaAdmin />
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/profile-siswa-admin/:id"
-            element={<ProfileSiswaAdmin />}
-          />
 
           {/* Ekskul */}
           <Route path="/more-ekskul" element={<EskulLainnya />} />
           <Route
-            path="/dashboard/siswa/profile-eskul/satryarover"
+            path="/dashboard/siswa/Satrov/:id" 
             element={
               <ProtectedRoute allowedRoles={["siswa"]}>
                 <ProfileSatrov />
@@ -200,7 +194,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route
             path="/dashboard/admin/profile-eskul/satryarover"
             element={
@@ -210,8 +203,9 @@ function App() {
             }
           />
 
+          {/* ✅ Route dinamis ke halaman daftar ekskul */}
           <Route
-            path="/more-ekskul/daftar/satryarover"
+            path="/more-ekskul/daftar/:id"
             element={
               <ProtectedRoute allowedRoles={["siswa"]}>
                 <SatrovDaftar />
@@ -219,6 +213,7 @@ function App() {
             }
           />
 
+          {/* Admin view pembina */}
           <Route
             path="/profile-pembina/admin/:id"
             element={
@@ -227,6 +222,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           {/* Not Found */}
           <Route path="*" element={<NotFound />} />
         </Routes>

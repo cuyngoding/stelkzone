@@ -1,53 +1,78 @@
-import Navbar from "../components/Navbar"
-import SatryaRover from "../assets/satrya-rover.png";
-import BackButton from "../components/ButtonBack";
-import './Satrov.css'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import api from '../utils/api';
+import Navbar from '../components/Navbar';
+import './SatrovDaftar.css'; // gunakan CSS yang sama
 
 function Satrov() {
+  const { id } = useParams();
+  const [ekskul, setEkskul] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.get(`/ekskuls/${id}`)
+      .then(res => setEkskul(res.data))
+      .catch(() => {
+        console.error('Gagal mengambil data ekskul');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) return <div className="satrov-page"><p>Memuat data ekskul...</p></div>;
+  if (!ekskul) return <p>Ekskul tidak ditemukan</p>;
+
   return (
-    <>
     <div className="satrov-page">
-    <Navbar />
-    <img className="logo-eskul" src={SatryaRover} alt="" />
-    <h1 className="nama-eskul">PRAMUKA (SATRYA ROVER)</h1>
-    <h3 className="desc-label-eskul">Description</h3>
-    <p className="desc-eskul">Ekstrakurikuler Pramuka Ambalan SATRYA ROVER di SMK Telkom Makassar mengembangkan kepemimpinan, kedisiplinan, dan kebersamaan melalui latihan rutin, perkemahan, dan program yang membentuk karakter serta keterampilan anggota untuk menghadapi tantangan.</p>
-    <div className="structure-satrov">
-      <label htmlFor=""className="pembina-pa pembina">Pembina Putra</label>
-      <input className="pembina-pa-value value-satrov" type="text" name="" id="" value=" Haryadi Indrawijaya" />
-      <label htmlFor=""className="pembina-pi pembina">Pembina Putri</label>
-      <input className="pembina-pi-value value-satrov" type="text" name="" id="" value=" Yayu Aprilika Yunus" />
-      <label className="ketua-pa ketua" htmlFor="">Ketua Putra</label>
-      <input className="value-satrov" type="text" name="" id="" value=" Arthawan Pratama Pakurimba Azzuhud" />
-      <label className="ketua-pi ketua" htmlFor="">Ketua Putri</label>
-      <input className="value-satrov" type="text" name="" id="" value=" Siti Khadija Sukardi" />
-      <h1 className="header-daftar-anggota">Anggota</h1>
-      <table className="table-anggota">
-        <thead>
-          <tr className="table-header">
-            <th className="table-header-item">Nama</th>
-            <th className="table-header-item">NIS</th>
-            <th className="table-header-item">KELAS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="table-row">
-            <td className="table-row-item">BACO ANDAYANA BIN BASO</td>
-            <td className="table-row-item">544231000</td>
-            <td className="table-row-item">XI RPL 1</td>
-          </tr>
-          <tr className="table-row">
-            <td className="table-row-item">LINDY SAFIRA</td>
-            <td className="table-row-item">544231001</td>
-            <td className="table-row-item">XI RPL 4</td>
-          </tr>
-        </tbody>
-      </table>
+      <Navbar />
+      <img className="logo-eskul" src={ekskul.logo} alt={ekskul.nama} />
+      <h1 className="nama-eskul">{ekskul.nama}</h1>
+
+      <h3 className="desc-label-eskul">Deskripsi</h3>
+      <p className="desc-eskul">{ekskul.deskripsi}</p>
+
+      <div className="structure-satrov">
+        {ekskul.pembina && (
+          <>
+            <label className="pembina">Pembina</label>
+            <input className="value-satrov" type="text" value={ekskul.pembina} readOnly />
+          </>
+        )}
+        {ekskul.pembina_putra && (
+          <>
+            <label className="pembina">Pembina Putra</label>
+            <input className="value-satrov" type="text" value={ekskul.pembina_putra} readOnly />
+          </>
+        )}
+        {ekskul.pembina_putri && (
+          <>
+            <label className="pembina">Pembina Putri</label>
+            <input className="value-satrov" type="text" value={ekskul.pembina_putri} readOnly />
+          </>
+        )}
+
+        {ekskul.ketua && (
+          <>
+            <label className="ketua">Ketua</label>
+            <input className="value-satrov" type="text" value={ekskul.ketua} readOnly />
+          </>
+        )}
+        {ekskul.ketua_putra && (
+          <>
+            <label className="ketua">Ketua Putra</label>
+            <input className="value-satrov" type="text" value={ekskul.ketua_putra} readOnly />
+          </>
+        )}
+        {ekskul.ketua_putri && (
+          <>
+            <label className="ketua">Ketua Putri</label>
+            <input className="value-satrov" type="text" value={ekskul.ketua_putri} readOnly />
+          </>
+        )}
+      </div>
     </div>
-    <BackButton />
-    </div>
-    </>
-  )
+  );
 }
 
-export default Satrov
+export default Satrov;

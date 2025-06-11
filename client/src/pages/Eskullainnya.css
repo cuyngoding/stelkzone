@@ -103,3 +103,15 @@
   cursor: pointer;
   color: #cc0000;
 }
+
+.empty-state {
+  text-align: center;
+  margin-top: 80px;
+  color: #666;
+}
+
+.loading-text {
+  text-align: center;
+  margin-top: 50px;
+  font-style: italic;
+}

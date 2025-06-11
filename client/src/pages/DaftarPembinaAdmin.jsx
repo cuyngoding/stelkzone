@@ -171,7 +171,7 @@ function DaftarPembinaAdmin() {
           <input
             className="bar-search"
             type="text"
-            placeholder="Cari berdasarkan NIP..."
+            placeholder="Cari..."
             value={searchNip}
             onChange={(e) => setSearchNip(e.target.value)}
           />

@@ -213,7 +213,7 @@ function DaftarSiswaAdmin() {
           <input
             className="bar-search"
             type="text"
-            placeholder="Cari berdasarkan NIS..."
+            placeholder="Cari..."
             value={inputNis}
             onChange={(e) => setInputNis(e.target.value)}
           />

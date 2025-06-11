@@ -136,3 +136,12 @@ header {
   animation-timeline: view();
   animation-range: entry 0;
 }
+
+.card img {
+  width: 100px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin: auto;
+}
+

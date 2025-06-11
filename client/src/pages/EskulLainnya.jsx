@@ -1,32 +1,26 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './EskulLainnya.css';
 import Navbar from "../components/Navbar";
-import SatryaRover from "../assets/satrya-rover.png";
-import WebTech from "../assets/web-tech.png";
-import Capture from "../assets/capture.png";
-import Gradasi from "../assets/gradasi.png";
-import Pastelk from "../assets/pastelk.png";
-import Elips from "../assets/elips.png";
+import api from "../utils/api";
 import BackButton from "../components/ButtonBack";
-import Ikramtel from "../assets/ikramtel.png";
-import Komers from "../assets/komers.png";
 
 function EskulLainnya() {
   const navigate = useNavigate();
+  const [eskuls, setEskuls] = useState([]);
 
-  const eskuls = [
-    { name: "SATRYA ROVER (PRAMUKA)", icon: SatryaRover, days: "JUMAT", members: 13, route: "satryarover" },
-    { name: "PASKIBRA STELK (PASTELK)", icon: Pastelk, days: "JUMAT, SABTU", members: 20, route: "pastelk" },
-    { name: "MENGGAMBAR (GRADASI)", icon: Gradasi, days: "JUMAT", members: 12, route: "gradasi" },
-    { name: "FOTOGRAFI (CAPTURE)", icon: Capture, days: "JUMAT", members: 9, route: "capture" },
-    { name: "ROBOTIK (ELIPS)", icon: Elips, days: "JUMAT", members: 15, route: "elips" },
-    { name: "REKAYASA WEB (WEB TECHNOLOGY)", icon: WebTech, days: "JUMAT", members: 10, route: "webtechnology" },
-    { name: "ISLAMI (IKRAMTEL)", icon: Ikramtel, days: "JUMAT", members: 13, route: "ikramtel" },
-    { name: "JURNALISTIK (KOMERS)", icon: Komers, days: "JUMAT", members: 13, route: "komers" },
-  ];
+  useEffect(() => {
+    api.get('/ekskuls')
+      .then(res => {
+        setEskuls(res.data);
+      })
+      .catch(() => {
+        console.error('Gagal mengambil data ekskul');
+      });
+  }, []);
 
-  const handleNavigate = (route) => {
-    navigate(`/more-ekskul/daftar/${route}`);
+  const handleNavigate = (id) => {
+    navigate(`/more-ekskul/daftar/${id}`); // ✅ arahkan ke path dinamis
   };
 
   return (
@@ -39,19 +33,24 @@ function EskulLainnya() {
         </div>
 
         <div className="eskul-list">
-          {eskuls.map((eskul, index) => (
-            <div key={index} className="eskul-item">
-              <img src={eskul.icon} alt={eskul.name} className='eskul-icon' />
-              <div className="eskul-info">
-                <h2>{eskul.name}</h2>
-                <p>Hari: {eskul.days}</p>
-              </div>
-              <div className="eskul-members">
-                <span>Jumlah: {eskul.members}</span>
-                <button className="arrow-btn" onClick={() => handleNavigate(eskul.route)}>→</button>
-              </div>
+          {eskuls.length === 0 ? (
+            <div className="empty-state">
+              <h2>Tidak ada ekskul tersedia 😢</h2>
             </div>
-          ))}
+          ) : (
+            eskuls.map((ekskul) => (
+              <div key={ekskul.id} className="eskul-item">
+                <img src={ekskul.logo} alt={ekskul.nama} className='eskul-icon' />
+                <div className="eskul-info">
+                  <h2>{ekskul.nama}</h2>
+                </div>
+                <div className="eskul-members">
+                  <span>Jumlah: {ekskul.jumlah_anggota || 0}</span>
+                  <button className="arrow-btn" onClick={() => handleNavigate(ekskul.id)}>→</button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
         <BackButton />
       </div>
