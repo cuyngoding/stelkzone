@@ -2,8 +2,8 @@
 
 .nav-container {
     position: fixed;
-    right: 0px;
-    /* bottom: 705px; */
+    top: 0; /* biar selalu nempel di atas */
+    right: 0;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -12,6 +12,7 @@
     border-bottom: 1px solid #b7b7b7;
     z-index: 10000;
 }
+
 
 .button-menu {
     position: relative;

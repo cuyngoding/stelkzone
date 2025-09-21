@@ -195,9 +195,6 @@ const fetchSiswa = async () => {
             onChange={(e) => setInputNis(e.target.value)}
           />
           <button className="search-btn" onClick={handleSearchClick}>GO</button>
-          <button className="tambah-data-btn" onClick={handleTambahData}>
-            <IoMdAdd />
-          </button>
         </div>
 
         <div className="eskul-list">

@@ -43,14 +43,11 @@ useEffect(() => {
               {ekskuls.length === 0 ? (
         <div className="empty-state">
           <h2>Kamu belum mengikuti ekskul apapun</h2>
-          <button onClick={() => navigate("/more-ekskul")} className="explore-btn">
-            Jelajahi Ekskul
-          </button>
         </div>
       ) : (
         ekskuls.map((ekskul, index) => (
           <div className="card" key={index}>
-            <img src={ekskul.logo} alt={ekskul.nama} />
+            <img src={ekskul.logo}  />
             <h3>{ekskul.nama}</h3>
             <p className="jumlah-anggota">Jumlah: {ekskul.jumlah_anggota || 0}</p>
             <button type="button" onClick={() => navigate(`/dashboard/siswa/satrov/${ekskul.id}`)}>

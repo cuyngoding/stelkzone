@@ -58,7 +58,7 @@ function Navbar() {
             alt="User Profile"
             onClick={toprofile}
           />
-          <div className="user-name-siswa">{siswa.nama || "Siswa"}</div>
+          <div className="user-name-siswa" onClick={toprofile}>{siswa.nama || "Siswa"}</div>
         </div>
 
         <button className="btn-logout" onClick={handleLogout}>

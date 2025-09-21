@@ -121,6 +121,28 @@ function SatrovDaftar() {
             <input className="value-satrov" type="text" value={ekskul.ketua_putri} readOnly />
           </>
         )}
+        <h1 className="header-daftar-anggota">Anggota</h1>
+      <table className="table-anggota">
+        <thead>
+          <tr className="table-header">
+            <th className="table-header-item">Nama</th>
+            <th className="table-header-item">NIS</th>
+            <th className="table-header-item">KELAS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="table-row">
+            <td className="table-row-item">BACO ANDAYANA BIN BASO</td>
+            <td className="table-row-item">544231000</td>
+            <td className="table-row-item">XI RPL 1</td>
+          </tr>
+          <tr className="table-row">
+            <td className="table-row-item">LINDY SAFIRA</td>
+            <td className="table-row-item">544231001</td>
+            <td className="table-row-item">XI RPL 4</td>
+          </tr>
+        </tbody>
+      </table>
       </div>
     </div>
   );
