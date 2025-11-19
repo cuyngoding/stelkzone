@@ -4,7 +4,7 @@ import { getUser } from '../utils/auth';
 import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from "../components/Navbar";
-import './SatrovDaftar.css';
+import './Satrov.css';
 
 function SatrovDaftar() {
   const navigate = useNavigate();
@@ -137,7 +137,7 @@ function SatrovDaftar() {
             <td className="table-row-item">XI RPL 1</td>
           </tr>
           <tr className="table-row">
-            <td className="table-row-item">LINDY SAFIRA</td>
+            <td className="table-row-item">ARTHAWAN PRATAMA PAKURIMBA AZZUHUD</td>
             <td className="table-row-item">544231001</td>
             <td className="table-row-item">XI RPL 4</td>
           </tr>

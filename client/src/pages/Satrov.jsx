@@ -9,7 +9,7 @@ import './Satrov.css';
 
 function Satrov() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams(); 
   const [siswaId, setSiswaId] = useState(null);
   const [ekskul, setEkskul] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -111,7 +111,7 @@ function Satrov() {
             <td>XI RPL 1</td>
           </tr>
           <tr>
-            <td>LINDY SAFIRA</td>
+            <td>ARTHAWAN PRATAMA PAKURIMBA AZZUHUD</td>
             <td>544231001</td>
             <td>XI RPL 4</td>
           </tr>

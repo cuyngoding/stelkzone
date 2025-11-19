@@ -1,7 +1,7 @@
 .satrov-page {
   min-height: 100vh;
   padding: 2rem;
-  padding-top: 80px;
+  padding-top: 80px;  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,6 +52,9 @@
   width: 400px;
   max-width: 90%;
   padding: 20px;
+  display: flex;            /* added */
+  flex-direction: column;   /* added */
+  align-items: flex-start;  /* added -> ensure children align left */
 }
 
 .pembina,
@@ -80,17 +83,19 @@
   width: 100%;
   max-width: 900px;
   text-align: left;
+  margin-left: 0;        /* ensure header starts at left of the column */
 }
 
 /* Tabel Anggota */
 .table-anggota {
   border-collapse: collapse;
   width: 100%;
-  max-width: 900px;
+  max-width: 100%;      /* changed from 900px -> limit to parent width */
   background-color: #ffffff;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border-radius: 22px;
   overflow: hidden;
+  margin: 0 auto;        /* center table inside its column (matches siswa) */
 }
 
 .table-anggota th,
@@ -168,4 +173,12 @@
 
 .accicon {
   font-size: 1.6rem;
+}
+
+.anggota-section {
+  width: 100%;
+  max-width: 1100px; /* samakan dengan container utama */
+  margin: 0 auto;    /* pusatkan */
+  margin-top: 1rem;
+  padding: 0 1rem;   /* beri ruang di kiri/kanan jika perlu */
 }
