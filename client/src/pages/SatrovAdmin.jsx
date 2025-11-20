@@ -47,6 +47,7 @@ function Satrov() {
     <NavbarAdmin />
     <img className="logo-eskul" src={SatryaRover} alt="" />
     <h1 className="nama-eskul">PRAMUKA (SATRYA ROVER)</h1>
+
     <div className="satrov-container">
       <div>
         <h3 className="desc-label-eskul">Description</h3>

@@ -68,6 +68,7 @@
     margin: 5px;
     font-size: 20px;
     z-index: 300;
+    cursor: pointer;
 }
 
 .btn-logout {

@@ -6,6 +6,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -28,13 +29,16 @@ import ProfileSiswaAdmin from "./pages/ProfileSiswaAdmin";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProfilePembinaAdmin from "./pages/ProfilePembinaAdmin";
 import "./App.css";
-
 // Redirect otomatis berdasarkan role
 const RedirectByRole = ({ role }) => {
   if (role === "admin") return <Navigate to="/dashboard/admin" />;
   if (role === "pembina") return <Navigate to="/dashboard/pembina" />;
   if (role === "siswa") return <Navigate to="/dashboard/siswa" />;
   return <Login />;
+};
+
+RedirectByRole.propTypes = {
+  role: PropTypes.string,
 };
 
 // Wrapper untuk mengatur scroll & redirect kalau belum login
@@ -194,8 +198,9 @@ function App() {
               </ProtectedRoute>
             }
           />
+          {/* tandai */}
           <Route
-            path="/dashboard/admin/profile-eskul/satryarover"
+            path="/dashboard/admin/Satrov/:id" 
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
                 <ProfileSatrovAdmin />

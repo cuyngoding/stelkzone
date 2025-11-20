@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Navbar from "../components/Navbar";
 import api from "../utils/api"; // gunakan axios instance dengan token otomatis
-import { checkAuth } from "../utils/api";
 
 function Home() {
   const navigate = useNavigate();

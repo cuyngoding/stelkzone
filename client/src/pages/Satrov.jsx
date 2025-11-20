@@ -10,15 +10,12 @@ import './Satrov.css';
 function Satrov() {
   const navigate = useNavigate();
   const { id } = useParams(); 
-  const [siswaId, setSiswaId] = useState(null);
   const [ekskul, setEkskul] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const user = getUser();
-    if (user?.role === 'siswa') {
-      setSiswaId(user.id);
-    } else {
+    if (user?.role !== 'siswa') {
       Swal.fire('Akses ditolak', 'Hanya siswa yang dapat mendaftar ekskul.', 'error');
       navigate('/');
     }

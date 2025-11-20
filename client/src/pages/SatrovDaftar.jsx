@@ -4,15 +4,16 @@ import { getUser } from '../utils/auth';
 import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from "../components/Navbar";
+import './SatrovDaftar.css';
 import './Satrov.css';
-
+ 
 function SatrovDaftar() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [siswaId, setSiswaId] = useState(null);
   const [ekskul, setEkskul] = useState(null);
   const [loading, setLoading] = useState(true);
-
+ 
   useEffect(() => {
     const user = getUser();
     if (user?.role === 'siswa') {
@@ -22,7 +23,7 @@ function SatrovDaftar() {
       navigate('/'); // atau redirect ke dashboard
     }
   }, [navigate]);
-
+ 
   useEffect(() => {
     if (id) {
       api.get(`/ekskuls/${id}`)
@@ -37,13 +38,13 @@ function SatrovDaftar() {
         });
     }
   }, [id]);
-
+ 
   const handleDaftar = () => {
     if (!siswaId || !ekskul) {
       Swal.fire('Info', 'Sedang memuat data, silakan tunggu.', 'info');
       return;
     }
-
+ 
     api.post('/pendaftaran-ekskul', {
       siswa_id: siswaId,
       ekskul_id: ekskul.id,
@@ -53,7 +54,7 @@ function SatrovDaftar() {
         title: "Berhasil Daftar",
         text: `Anda berhasil mendaftar ke ekskul ${ekskul.nama}.`,
         icon: "success"
-      })
+      });
     })
     .catch((error) => {
       if (error.response?.status === 409) {
@@ -63,10 +64,10 @@ function SatrovDaftar() {
       }
     });
   };
-
+ 
   if (loading) return <div className="satrov-page"><p>Memuat data...</p></div>;
   if (!ekskul) return null;
-
+ 
   return (
     <div className="satrov-page">
       <Navbar />
@@ -79,10 +80,13 @@ function SatrovDaftar() {
       >
         DAFTAR
       </button>
-
-      <h3 className="desc-label-eskul">Deskripsi</h3>
-      <p className="desc-eskul">{ekskul.deskripsi}</p>
-
+ 
+      <div className="satrov-container">
+        <div>
+          <h3 className="desc-label-eskul">Deskripsi</h3>
+          <p className="desc-eskul">{ekskul.deskripsi}</p>
+        </div>
+ 
       <div className="structure-satrov">
         {ekskul.pembina && (
           <>
@@ -102,7 +106,7 @@ function SatrovDaftar() {
             <input className="value-satrov" type="text" value={ekskul.pembina_putri} readOnly />
           </>
         )}
-
+ 
         {ekskul.ketua && (
           <>
             <label className="ketua">Ketua</label>
@@ -121,31 +125,36 @@ function SatrovDaftar() {
             <input className="value-satrov" type="text" value={ekskul.ketua_putri} readOnly />
           </>
         )}
+      </div>
+ 
+      {/* Anggota diletakkan di luar struktur agar bisa center sama seperti halaman terdaftar */}
+      <div className="anggota-section">
         <h1 className="header-daftar-anggota">Anggota</h1>
-      <table className="table-anggota">
-        <thead>
-          <tr className="table-header">
-            <th className="table-header-item">Nama</th>
-            <th className="table-header-item">NIS</th>
-            <th className="table-header-item">KELAS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="table-row">
-            <td className="table-row-item">BACO ANDAYANA BIN BASO</td>
-            <td className="table-row-item">544231000</td>
-            <td className="table-row-item">XI RPL 1</td>
-          </tr>
-          <tr className="table-row">
-            <td className="table-row-item">ARTHAWAN PRATAMA PAKURIMBA AZZUHUD</td>
-            <td className="table-row-item">544231001</td>
-            <td className="table-row-item">XI RPL 4</td>
-          </tr>
-        </tbody>
-      </table>
+        <table className="table-anggota">
+          <thead>
+            <tr className="table-header">
+              <th className="table-header-item">Nama</th>
+              <th className="table-header-item">NIS</th>
+              <th className="table-header-item">KELAS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="table-row">
+              <td className="table-row-item">BACO ANDAYANA BIN BASO</td>
+              <td className="table-row-item">544231000</td>
+              <td className="table-row-item">XI RPL 1</td>
+            </tr>
+            <tr className="table-row">
+              <td className="table-row-item">ARTHAWAN PRATAMA PAKURIMBA AZZUHUD</td>
+              <td className="table-row-item">544231001</td>
+              <td className="table-row-item">XI RPL 4</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  );
-}
-
+  </div>
+   );
+ }
+ 
 export default SatrovDaftar;
