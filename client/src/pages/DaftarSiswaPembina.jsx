@@ -2,12 +2,10 @@ import { useNavigate } from "react-router-dom";
 import "./DaftarSiswaPembina.css";
 import PhotoProfile from "../assets/user-profile.png";
 import NavbarPembina from "../components/NavbarPembina";
-import { IoMdAdd } from "react-icons/io";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useState, useEffect } from "react";
-import BackButton from "../components/ButtonBack";
 import axios from "axios";
 import { getToken } from "../utils/auth";
 
@@ -50,6 +48,11 @@ const fetchSiswa = async () => {
   }
 };
 
+  useEffect(() => {
+    // Fetch siswa on mount and whenever searchNis changes
+    fetchSiswa();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchNis]);
 
   const handleNavigate = (id) => {
     navigate(`/profile-siswa/${id}`);
@@ -194,7 +197,10 @@ const fetchSiswa = async () => {
             value={inputNis}
             onChange={(e) => setInputNis(e.target.value)}
           />
-          <button className="search-btn" onClick={handleSearchClick}>GO</button>
+          <div className="search-actions">
+            <button className="search-btn" onClick={handleSearchClick}>GO</button>
+            <button className="add-btn" onClick={handleTambahData}>Tambah Data</button>
+          </div>
         </div>
 
         <div className="eskul-list">
@@ -222,7 +228,6 @@ const fetchSiswa = async () => {
             </div>
           )}
         </div>
-        <BackButton />
       </div>
     </>
   );

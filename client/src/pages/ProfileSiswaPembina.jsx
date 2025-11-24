@@ -4,6 +4,8 @@ import PhotoUser from "../assets/user-profile.png";
 
 
 function Profile() {
+  const siswa = { kelas: "" };
+
   return (
     <>
       <div className="profile-page">

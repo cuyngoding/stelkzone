@@ -182,3 +182,43 @@
   margin-top: 1rem;
   padding: 0 1rem;   /* beri ruang di kiri/kanan jika perlu */
 }
+
+.table-anggota td.action {
+  text-align: center;
+  vertical-align: middle; /* center vertically inside row */
+  padding: 1rem; 
+  padding-right: 3rem;/* beri ruang agar tombol tidak menempel */
+}
+
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;   /* sesuaikan ukuran tombol */
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  background: transparent; /* atau warna sesuai desain */
+  cursor: pointer;
+  margin-left: 70px;
+  z-index: 1000;
+}
+
+/* pastikan icon di dalam tombol juga dipusatkan */
+
+/* Pastikan input & select di popup swal punya lebar sama */
+.tambah-data-popup .swal2-input,
+.tambah-data-popup select.swal2-input {
+  width: 100% !important;
+  box-sizing: border-box;
+  display: block;
+  margin: 0.25rem 0 1rem 0;
+  max-width: 100%;
+}
+
+/* Jika kamu menggunakan label + select yang diletakkan terpisah,
+   pastikan container popup memberi ruang horizontal cukup */
+.tambah-data-popup .form-container {
+  width: 100%;
+}
+

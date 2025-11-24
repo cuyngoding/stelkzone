@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import NavbarAdmin from "../components/NavbarAdmin";
-import BackButton from "../components/ButtonBack";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { getToken } from "../utils/auth";
@@ -18,11 +17,7 @@ function DaftarPembinaAdmin() {
   const [searchNip, setSearchNip] = useState("");
   const [queryNip, setQueryNip] = useState(""); // nilai untuk trigger pencarian
 
-  useEffect(() => {
-    fetchPembina();
-  }, [queryNip]);
-
-  const fetchPembina = async () => {
+  const fetchPembina = useCallback(async () => {
     try {
       const token = getToken();
       const res = await axios.get(`http://localhost:8000/api/pembinas?search=${queryNip}`, {
@@ -41,7 +36,11 @@ function DaftarPembinaAdmin() {
       console.error("Error saat fetch pembina:", error);
       setPembinaList([]);
     }
-  };
+  }, [queryNip]);
+
+  useEffect(() => {
+    fetchPembina();
+  }, [fetchPembina]);
 
   const handleNavigate = (id) => {
     navigate(`/profile-pembina/admin/${id}`);
@@ -211,7 +210,6 @@ function DaftarPembinaAdmin() {
             </div>
           )}
         </div>
-        <BackButton />
       </div>
     </>
   );

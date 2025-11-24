@@ -15,16 +15,14 @@
 
 
 .button-menu {
-    position: relative;
-    right: 410px;
+     position: relative;
+    right: 530px;
     background-color: #B90303;
-    outline: none;
     height: 40px;
     width: 40px;
     color: white;
     font-size: 23px;
     text-align: center;
-    text-wrap: wrap;
     border: none;
     padding: 21px;
     border-radius: 100%;
@@ -46,7 +44,7 @@
 
 .user-photo {
     position: relative;
-    left: 800px;
+    left: 650px;
     margin: 5px;
     margin-top: 10px;
     width: 49px;
@@ -57,22 +55,20 @@
 
 .user-name-siswa {
     position: relative;
-    left: 335px;
-    bottom: 250px;
-    top: -50px;
-    margin-bottom: 150px;
+    left: 395px;
     text-decoration: none;
     color: black;
     font-weight: 700;
-    bottom: 20px;
+    bottom: 55px;
     margin: 5px;
+    margin-top: 10px;
     font-size: 20px;
-    z-index: 300;
     cursor: pointer;
+    z-index: 100;
 }
 
 .btn-logout {
-    background-color: #B90303;
+   background-color: #B90303;
     color: white;
     font-weight: 700;
     border-radius: 10px;
@@ -83,7 +79,7 @@
     width: 120px;
     position: relative;
     top: 15px;
-    left: 410px;
+    left: 490px;
     cursor: pointer;
     z-index: 100;
     transition: 0.3s ease-in-out;

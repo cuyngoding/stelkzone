@@ -6,8 +6,7 @@ import { IoMdAdd } from "react-icons/io";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useState, useEffect } from "react";
-import BackButton from "../components/ButtonBack";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { getToken } from "../utils/auth";
 
@@ -19,11 +18,7 @@ function DaftarSiswaAdmin() {
   const [inputNis, setInputNis] = useState("");   // Untuk input pencarian
   const [searchNis, setSearchNis] = useState(""); // Untuk trigger fetch
 
-  useEffect(() => {
-    fetchSiswa();
-  }, [searchNis]);
-
-  const fetchSiswa = async () => {
+  const fetchSiswa = useCallback(async () => {
     const token = getToken();
     try {
       const res = await fetch(`http://localhost:8000/api/siswas?search=${searchNis}`, {
@@ -48,7 +43,11 @@ function DaftarSiswaAdmin() {
       console.error("Error saat fetch data:", error);
       setSiswaList([]);
     }
-  };
+  }, [searchNis]);
+
+  useEffect(() => {
+    fetchSiswa();
+  }, [fetchSiswa]);
 
   const handleNavigate = (id) => {
     navigate(`/profile-siswa-admin/${id}`);
@@ -256,7 +255,6 @@ function DaftarSiswaAdmin() {
             </div>
           )}
         </div>
-        <BackButton />
       </div>
     </>
   );

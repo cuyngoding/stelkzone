@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import './EskulLainnya.css';
 import Navbar from "../components/Navbar";
 import api from "../utils/api";
-import BackButton from "../components/ButtonBack";
 
 function EskulLainnya() {
   const navigate = useNavigate();
@@ -52,7 +51,6 @@ function EskulLainnya() {
             ))
           )}
         </div>
-        <BackButton />
       </div>
     </>
   );

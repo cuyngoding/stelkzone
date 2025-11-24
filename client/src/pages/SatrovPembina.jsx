@@ -1,6 +1,5 @@
 import Navbar from "../components/NavbarPembina"
-import SatryaRover from "../assets/satrya-rover.png";
-import { BiSolidPencil } from "react-icons/bi";
+import SatryaRover from "../assets/satrya-rover.png"; 
 import { FaTrash } from "react-icons/fa";
 import BackButton from "../components/ButtonBack";
 import { IoPeople } from "react-icons/io5";
@@ -8,19 +7,20 @@ import Swal from "sweetalert2";
 import './Satrov.css'
 
 function Satrov() {
+  // popup persetujuan pembina
   const handleTambahData = () => {
     Swal.fire({
       title: 'Persetujuan Pembina',
       html: `
         <div class="form-container">
           <label for="nama">PILIH SISWA</label>
-          <select id="nama" class="swal2-input">
+          <select id="nama" class="swal2-input" style="width:100%;">
           <option value="">Pilih Siswa</option>
-          <option value="BACO ANDAYANA BIN BASO">BACO ANDAYANA BIN BASO</option>
-          <option value="LINDY SAFIRA">LINDY SAFIRA</option>
+          <option value="DUMMY SISWA 1">DUMMY SISWA 1</option>
+          <option value="DUMMY SISWA 2">DUMMY SISWA 2</option>
           </select>
           <label for="jabatan">JABATAN</label>
-          <select id="jabatan" class="swal2-input">
+          <select id="jabatan" class="swal2-input" style="width:100%;">
           <option value="">Pilih Jabatan</option>
           <option value="Anggota">Anggota</option>
           <option value="Ketua Putra">Ketua putra</option>
@@ -36,8 +36,9 @@ function Satrov() {
         },
       preConfirm: () => {
         const nama = document.getElementById('nama').value;
-        const nis = document.getElementById('nis').value;
+        const jabatan = document.getElementById('jabatan').value;
         // Simpan data ke server atau lakukan aksi lain di sini
+        return { nama, jabatan };
       }
     });
   };
@@ -82,7 +83,6 @@ function Satrov() {
              <td className="table-row-item">544231000</td>
              <td className="table-row-item">XI RPL 1</td>
              <td className="table-row-item action">
-               <button className="btn-edit"><BiSolidPencil/></button>
                <button className="btn-delete"><FaTrash/></button>
              </td>
  
@@ -92,7 +92,6 @@ function Satrov() {
              <td className="table-row-item">544231001</td>
              <td className="table-row-item">XI RPL 4</td>
              <td className="table-row-item action">
-               <button className="btn-edit"><BiSolidPencil/></button>
                <button className="btn-delete"><FaTrash/></button>  
              </td>
            </tr>

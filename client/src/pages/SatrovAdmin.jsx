@@ -1,9 +1,7 @@
 import NavbarAdmin from "../components/NavbarAdmin";
 import SatryaRover from "../assets/satrya-rover.png";
-import { BiSolidPencil } from "react-icons/bi";
 import { FaTrash } from "react-icons/fa";
 import { MdOutlineAdd } from "react-icons/md";
-import PhotoProfile from "../assets/user-profile.png";
 import BackButton from "../components/ButtonBack";
 import Swal from "sweetalert2";
 import './Satrov.css';
@@ -14,14 +12,14 @@ function Satrov() {
       title: 'Tambah Data Anggota',
       html: `
        <div class="form-container">
-          <label for="nama">Nama</label>
+          <label for="nama">Nama / NIS </label>
           <input type="text" id="nama" class="swal2-input">
           <label for="jabatan">JABATAN</label>
           <select id="jabatan" class="swal2-input">
           <option value="">Pilih Jabatan</option>
           <option value="Anggota">Anggota</option>
-          <option value="Ketua Putra">Pembina putra</option>
-          <option value="Ketua Putra">Pembina putri</option>
+          <option value="Pembina Putra">Pembina putra</option>
+          <option value="Pembina Putri">Pembina putri</option>
           <option value="Ketua Putra">Ketua putra</option>
           <option value="Ketua Putri">Ketua putri</option>
           </select>
@@ -36,8 +34,9 @@ function Satrov() {
         },
       preConfirm: () => {
         const nama = document.getElementById('nama').value;
-        const nis = document.getElementById('nis').value;
+        const jabatan = document.getElementById('jabatan').value;
         // Simpan data ke server atau lakukan aksi lain di sini
+        return { nama, jabatan };
       }
     });
   };
@@ -83,7 +82,6 @@ function Satrov() {
             <td className="table-row-item">544231000</td>
             <td className="table-row-item">XI RPL 1</td>
             <td className="table-row-item action">
-              <button className="btn-edit"><BiSolidPencil/></button>
               <button className="btn-delete"><FaTrash/></button>
             </td>
 
@@ -93,7 +91,6 @@ function Satrov() {
             <td className="table-row-item">544231001</td>
             <td className="table-row-item">XI RPL 4</td>
             <td className="table-row-item action">
-              <button className="btn-edit"><BiSolidPencil/></button>
               <button className="btn-delete"><FaTrash/></button>  
             </td>
           </tr>
